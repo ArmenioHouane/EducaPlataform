@@ -9,7 +9,7 @@ import Cursos from './assets/components/pages/Cursos';
 const App: React.FC = () => {
   return (
     <ThemeProvider>
-      <div className="bg-seaShell dark:bg-lighterNavy">
+      <div className="bg-seaShell dark:bg-backdarkdm">
         <Router>
           <ComplexNavbar />
           <Routes>
