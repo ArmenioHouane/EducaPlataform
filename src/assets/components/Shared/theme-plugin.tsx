@@ -19,6 +19,11 @@ const ThemePlugin: React.FC<ThemePluginProps> = ({ initialTheme }) => {
     <IconButton
       onClick={handleThemeSwitcher}
       color="white"
+      
+      style={{
+        
+        borderRadius: '50%',
+      }}
     >
       {theme === 'light' ? (
         <SunIcon className="h-6 w-6" /> // Sun icon for light theme

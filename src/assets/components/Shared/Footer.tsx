@@ -20,9 +20,9 @@ const currentYear = new Date().getFullYear();
  
 export function FooterWithSitemap() {
   return (
-    <footer className="relative w-full bg-backWhitelm dark:bg-backdarkdm">
-      <div className="mx-auto w-full max-w-7xl px-8">
-        <div className="mx-auto  grid w-full grid-cols-1 gap-8 py-12 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="relative w-full bg-backWhitelm dark:bg-backdarkdm ">
+      <div className="mx-auto w-full max-w-7xl px-8 ">
+        <div className="mx-auto  grid w-full grid-cols-1 gap-8 py-12 md:grid-cols-2 lg:grid-cols-4 ">
           {SITEMAP.map(({ title, links }, key) => (
             <div key={key} className="w-full">
               <Typography
@@ -34,7 +34,7 @@ export function FooterWithSitemap() {
               </Typography>
               <ul className="space-y-1">
                 {links.map((link, key) => (
-                  <Typography key={key} as="li" color="blue-gray" className="font-normal text-textWhitelm dark:text-whitextdm">
+                  <Typography key={key} as="li" color="blue-gray" className="font-normal text-textWhitelm dark:text-white hover:text-bgHoverlm dark:hover:text-bgHoverlm">
                     <a
                       href="#"
                       className="inline-block py-1 pr-2 transition-transform hover:scale-105"
