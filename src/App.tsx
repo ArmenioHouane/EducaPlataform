@@ -5,6 +5,7 @@ import { FooterWithSitemap } from './assets/components/Shared/Footer';
 import { ComplexNavbar } from './assets/components/Shared/Header';
 import { ThemeProvider } from './assets/components/context/ThemeContext'; 
 import Cursos from './assets/components/pages/Cursos';
+import Feature from './assets/components/pages/Feature';
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/cursos" element={<Cursos />} />
              </Routes>
+             <Feature />
           <FooterWithSitemap />
         </Router>
       </div>
