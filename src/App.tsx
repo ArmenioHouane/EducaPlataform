@@ -6,6 +6,7 @@ import { ComplexNavbar } from './assets/components/Shared/Header';
 import { ThemeProvider } from './assets/components/context/ThemeContext'; 
 import Cursos from './assets/components/pages/Cursos';
 import Feature from './assets/components/pages/Feature';
+import Contact from './assets/components/pages/Contact';
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/cursos" element={<Cursos />} />
+            <Route path="/contact" element={<Contact />} />
              </Routes>
            
         </Router>

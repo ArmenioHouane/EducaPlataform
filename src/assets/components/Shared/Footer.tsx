@@ -1,23 +1,34 @@
 import { Typography } from "@material-tailwind/react";
- 
+import { Link } from "react-router-dom"; // Importe o Link do React Router
+
 const SITEMAP = [
   {
     title: "Companhia",
-    links: ["Sobre Nos", "Cursos", "Nossa Equipe", "Projectos"],
+    links: [
+      { label: "Sobre Nos", route: "/" },
+      { label: "Cursos", route: "/cursos" },
+      { label: "Nossa Equipe", route: "/" },
+      { label: "Projectos", route: "/" },
+    ],
   },
   {
     title: "Centro de Ajuda",
-    links: [ "Twitter", "GitHub", "Entre em Contacto"],
+    links: [
+      { label: "Twitter", url: "#" },
+      { label: "GitHub", url: "#" },
+      { label: "Entre em Contacto", route: "/contact" },
+    ],
   },
   {
     title: "Recursos",
-    links: ["Newsletter", ],
+    links: [
+      { label: "Newsletter", route: "/" },
+    ],
   },
-  
 ];
- 
+
 const currentYear = new Date().getFullYear();
- 
+
 export function FooterWithSitemap() {
   return (
     <footer className="relative w-full bg-backWhitelm dark:bg-backdarkdm ">
@@ -35,12 +46,22 @@ export function FooterWithSitemap() {
               <ul className="space-y-1">
                 {links.map((link, key) => (
                   <Typography key={key} as="li" color="blue-gray" className="font-normal text-textWhitelm dark:text-white hover:text-bgHoverlm dark:hover:text-bgHoverlm">
-                    <a
-                      href="#"
-                      className="inline-block py-1 pr-2 transition-transform hover:scale-105"
-                    >
-                      {link}
-                    </a>
+                    {/* Verifica se a rota está definida ou se é uma URL externa */}
+                    {link.route ? (
+                      <Link
+                        to={link.route}
+                        className="inline-block py-1 pr-2 transition-transform hover:scale-105"
+                      >
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={link.url}
+                        className="inline-block py-1 pr-2 transition-transform hover:scale-105"
+                      >
+                        {link.label}
+                      </a>
+                    )}
                   </Typography>
                 ))}
               </ul>
@@ -76,23 +97,14 @@ export function FooterWithSitemap() {
             </Typography>
             <Typography as="a" href="#" className="opacity-80 transition-opacity hover:opacity-100">
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.252 8.252 0 01-2.605.996 4.107 4.107 0 00-6.993 3.74A11.651 11.651 0 013.067 4.89a4.106 4.106 0 001.27 5.482 4.073 4.073 0 01-1.86-.514v.051a4.106 4.106 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85 8.233 8.233 0 01-5.096 1.757c-.331 0-.657-.019-.98-.057a11.616 11.616 0 006.29 1.84" />
-              </svg>
-            </Typography>
-            <Typography as="a" href="#" className="opacity-80 transition-opacity hover:opacity-100">
-              <svg
-                className="h-5 w-5"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
                 <path
                   fillRule="evenodd"
-                  d="M12 2.163c-5.462 0-9.867 4.405-9.867 9.867 0 4.372 3.555 7.977 8.22 8.632v-6.1H8.318v-2.532h2.035v-1.918c0-2.016 1.196-3.123 3.021-3.123.878 0 1.792.156 1.792.156v1.975h-1.009c-.994 0-1.3.618-1.3 1.258v1.546h2.219l-.355 2.532h-1.864v6.1c4.665-.655 8.22-4.26 8.22-8.632 0-5.462-4.405-9.867-9.867-9.867z"
+                  d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.252 8.252 0 01-2.605.996 4.107 4.107 0 00-6.993 3.74A11.651 11.651 0 013.067 4.89a4.106 4.106 0 001.27 5.482 4.073 4.073 0 01-1.86-.514v.051a4.106 4.106 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85 8.233 8.233 0 01-5.096 1.757c-.331 0-.657-.019-.98-.057a11.616 11.616 0 006.29 1.84"
                   clipRule="evenodd"
                 />
               </svg>
             </Typography>
+            
           </div>
         </div>
       </div>

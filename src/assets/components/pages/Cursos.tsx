@@ -1,4 +1,7 @@
 import React from 'react';
+import { ComplexNavbar } from '../Shared/Header';
+import { FooterWithSitemap } from '../Shared/Footer';
+
 
 const Cursos: React.FC = () => {
     const languageCourses = [
@@ -19,6 +22,7 @@ const Cursos: React.FC = () => {
 
     return (
         <div className="bg-white dark:bg-gray-800 text-black dark:text-white">
+            <ComplexNavbar />
             <div className="container mx-auto py-12">
                 <div className="text-center">
                     <h1 className="text-3xl font-bold mb-4">Cursos de Idiomas</h1>
@@ -58,6 +62,8 @@ const Cursos: React.FC = () => {
                     ))}
                 </div>
             </div>
+            <FooterWithSitemap />
+            
         </div>
     );
 };
