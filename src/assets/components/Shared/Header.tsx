@@ -116,29 +116,30 @@ function ProfileMenu() {
 }
  
 // nav list menu
+
 const navListMenuItems = [
   {
     title: "Cursos",
-    description:
-      "Navegue pelos nossos cursos",
+    description: "Navegue pelos nossos cursos",
+    link: "/cursos",
   },
   {
     title: "Dashboard",
-    description:
-      "Entre no Dashboard",
+    description: "Entre no Dashboard",
+    link: "/dashboard",
   },
   {
     title: "Sobre Nos",
-    description:
-      "Saiba mais sobre a nossa plataforma e nossa equipe.",
+    description: "Saiba mais sobre a nossa plataforma e nossa equipe.",
+    link: "/sobre-nos",
   },
 ];
  
 function NavListMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
  
-  const renderItems = navListMenuItems.map(({ title, description }) => (
-    <a href="#" key={title}>
+  const renderItems = navListMenuItems.map(({ title, description, link }) => (
+    <a href={link} key={title}>
       <MenuItem>
         <Typography variant="h6" color="blue-gray" className="mb-1">
           {title}
@@ -149,6 +150,7 @@ function NavListMenu() {
       </MenuItem>
     </a>
   ));
+ 
  
   return (
     <React.Fragment>
@@ -243,13 +245,18 @@ export function ComplexNavbar() {
  
   return (
     <Navbar className="mx-auto max-w-screen-xl p-2 lg:rounded-full lg:pl-6   ">
-      <div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
+      <div className="relative mx-auto flex items-center justify-between text-blue-gray-900 ">
+      
+      <ThemePlugin initialTheme="light" />
       <Typography
   as="a"
-  href="#"
-  className="mr-4 ml-2 cursor-pointer py-1.5 font-medium"
+  href="/"
+  className="mr-4 ml-2 cursor-pointer py-1.5 font-medium 
+  hover:text-bgHoverlm dark:hover:text-bgHoverlm 
+  hover:font-bold 
+  transform hover:scale-105 transition duration-300 ease-in-out"
 >
-  <ThemePlugin initialTheme="light" />
+ 
   &nbsp;&nbsp;
   <span>Moz Educa</span>
 </Typography>
