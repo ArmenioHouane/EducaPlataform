@@ -12,13 +12,12 @@ const App: React.FC = () => {
     <ThemeProvider>
       <div className="bg-seaShell dark:bg-backdarkdm">
         <Router>
-          <ComplexNavbar />
+          
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/cursos" element={<Cursos />} />
              </Routes>
-             <Feature />
-          <FooterWithSitemap />
+           
         </Router>
       </div>
     </ThemeProvider>
