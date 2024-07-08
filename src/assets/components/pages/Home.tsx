@@ -2,6 +2,7 @@ import React from 'react';
 import { ComplexNavbar } from '../Shared/Header';
 import { FooterWithSitemap } from '../Shared/Footer';
 import Feature from './Feature';
+import Pricing from './Pricing';
 
 const Home = () => {
   return (
@@ -66,6 +67,7 @@ const Home = () => {
         </div>
       </div>
       <Feature />
+      <Pricing />
       <FooterWithSitemap />
     </div>
   );

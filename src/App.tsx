@@ -7,6 +7,9 @@ import { ThemeProvider } from './assets/components/context/ThemeContext';
 import Cursos from './assets/components/pages/Cursos';
 import Feature from './assets/components/pages/Feature';
 import Contact from './assets/components/pages/Contact';
+import Profile from './assets/components/pages/Profile';
+import Login from './assets/components/pages/Login';
+import Pricing from './assets/components/pages/Pricing';
 
 const App: React.FC = () => {
   return (
@@ -18,6 +21,11 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/cursos" element={<Cursos />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/feature" element={<Feature />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/pricing" element={<Pricing />} />
+
              </Routes>
            
         </Router>

@@ -24,12 +24,10 @@ import {
   PowerIcon,
   RocketLaunchIcon,
   Bars2Icon,
-  MoonIcon,
 } from "@heroicons/react/24/solid";
 import ThemePlugin from "./theme-plugin";
 import { Link } from 'react-router-dom';
 
- 
 // profile menu component
 const profileMenuItems = [
   {
@@ -53,12 +51,12 @@ const profileMenuItems = [
     icon: PowerIcon,
   },
 ];
- 
+
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
- 
+
   const closeMenu = () => setIsMenuOpen(false);
- 
+
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
       <MenuHandler>
@@ -114,7 +112,7 @@ function ProfileMenu() {
     </Menu>
   );
 }
- 
+
 // nav list menu
 
 const navListMenuItems = [
@@ -134,10 +132,10 @@ const navListMenuItems = [
     link: "/sobre-nos",
   },
 ];
- 
+
 function NavListMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
- 
+
   const renderItems = navListMenuItems.map(({ title, description, link }) => (
     <a href={link} key={title}>
       <MenuItem>
@@ -150,8 +148,7 @@ function NavListMenu() {
       </MenuItem>
     </a>
   ));
- 
- 
+
   return (
     <React.Fragment>
       <Menu allowHover open={isMenuOpen} handler={setIsMenuOpen}>
@@ -193,12 +190,13 @@ function NavListMenu() {
     </React.Fragment>
   );
 }
- 
+
 // nav list component
 const navListItems = [
   {
     label: "Conta",
     icon: UserCircleIcon,
+    to: "/profile",
   },
   {
     label: "Quizes",
@@ -207,10 +205,9 @@ const navListItems = [
   {
     label: "Docs",
     icon: CodeBracketSquareIcon,
-    to: "/cursos", 
+    to: "/cursos",
   },
 ];
-
 
 function NavList() {
   return (
@@ -227,40 +224,34 @@ function NavList() {
     </ul>
   );
 }
- 
+
 export function ComplexNavbar() {
-  
-
-
   const [isNavOpen, setIsNavOpen] = React.useState(false);
- 
+
   const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
- 
+
   React.useEffect(() => {
     window.addEventListener(
       "resize",
       () => window.innerWidth >= 960 && setIsNavOpen(false),
     );
   }, []);
- 
-  return (
-    <Navbar className="mx-auto max-w-screen-xl p-2 lg:rounded-full lg:pl-6   ">
-      <div className="relative mx-auto flex items-center justify-between text-blue-gray-900 ">
-      
-      <ThemePlugin initialTheme="light" />
-      <Typography
-  as="a"
-  href="/"
-  className="mr-4 ml-2 cursor-pointer py-1.5 font-medium 
-  hover:text-bgHoverlm dark:hover:text-bgHoverlm 
-  hover:font-bold 
-  transform hover:scale-105 transition duration-300 ease-in-out"
->
- 
-  &nbsp;&nbsp;
-  <span>Moz Educa</span>
-</Typography>
 
+  return (
+    <Navbar className="fixed top-0 left-0 right-0 z-50 mx-auto max-w-screen-xl p-2 lg:rounded-full lg:pl-6">
+      <div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
+        <ThemePlugin initialTheme="light" />
+        <Typography
+          as="a"
+          href="/"
+          className="mr-4 ml-2 cursor-pointer py-1.5 font-medium 
+          hover:text-bgHoverlm dark:hover:text-bgHoverlm 
+          hover:font-bold 
+          transform hover:scale-105 transition duration-300 ease-in-out"
+        >
+          &nbsp;&nbsp;
+          <span>Moz Educa</span>
+        </Typography>
         <div className="hidden lg:block ">
           <NavList />
         </div>
@@ -273,15 +264,23 @@ export function ComplexNavbar() {
         >
           <Bars2Icon className="h-6 w-6" />
         </IconButton>
- 
-        <Button size="sm" variant="text">
-          <span>Log In</span>
-        </Button>
+        <Link to="/login">
+          <Button size="sm" variant="text">
+            <span>Login</span>
+          </Button>
+        </Link>
+        <Link to="/sign-up">
+          <Button size="sm" variant="gradient" className="hidden lg:inline-block">
+            <span>Regista-te</span>
+          </Button>
+        </Link>
         <ProfileMenu />
       </div>
-      <MobileNav open={isNavOpen} className="overflow-scroll">
+      <MobileNav open={isNavOpen}>
         <NavList />
       </MobileNav>
     </Navbar>
   );
 }
+
+export default ComplexNavbar;
