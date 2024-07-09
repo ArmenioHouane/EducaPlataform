@@ -23,13 +23,7 @@ const Home = () => {
         </div>
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-            <div className="relative rounded-full bg-darkbtncolorlm px-3 py-1 text-sm leading-6 hover:bg-bgHoverlm dark:hover:bg-darklinkcolorlm dark:hover:text-white text-white ring-1 ring-gray-900/10">
-              Venha adquirir novas habilidades.{' '}
-              <a href="#" className="font-semibold text-darklinkcolorlm hover:text-white">
-                <span aria-hidden="true" className="absolute inset-0" />
-                Ler mais <span aria-hidden="true">&rarr;</span>
-              </a>
-            </div>
+            
           </div>
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-textWhitelm dark:text-whitextdm sm:text-6xl">
@@ -42,13 +36,13 @@ const Home = () => {
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
-                href="#"
+                href="/checkout"
                 className="rounded-md bg-darkbtncolorlm dark:bg-darkbtncolordm text-darkinnercolorlm dark:text-darkinnercolordm px-3.5 py-2.5 text-sm font-semibold shadow-sm hover:bg-bgHoverlm dark:hover:bg-darklinkcolorlm dark:hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Get started
+                Comece Agora
               </a>
               <a href="#" className="text-sm font-semibold leading-6 dark:text-white dark:hover:text-bgHoverlm">
-                Learn more <span aria-hidden="true">→</span>
+                Ler Mais <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>

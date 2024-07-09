@@ -26,6 +26,7 @@ module.exports = withMT({
  dropMenudm: '#423F4D', // Dark Mode DropDown Item Color
  bgHoverlm: '#1F75FE', // Hover button
  bgHoverdm: '#87CEEB', // Hover button
+ linkdm: '#1F71F3',
 
  // Light Mode Colors
  backWhitelm: '#F5F4FE', // Light Mode Background

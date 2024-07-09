@@ -8,7 +8,7 @@ const SITEMAP = [
       { label: "Sobre Nos", route: "/" },
       { label: "Cursos", route: "/cursos" },
       { label: "Nossa Equipe", route: "/" },
-      { label: "Projectos", route: "/" },
+      { label: "Projectos", route: "/sample" },
     ],
   },
   {

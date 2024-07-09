@@ -11,6 +11,8 @@ import Profile from './assets/components/pages/Profile';
 import Login from './assets/components/pages/Login';
 import Pricing from './assets/components/pages/Pricing';
 import { Faq } from './assets/components/pages/faq';
+import { Sample } from './assets/components/Dashboard/Sample';
+import { Checkout } from './assets/components/pages/Checkout';
 
 const App: React.FC = () => {
   return (
@@ -27,6 +29,8 @@ const App: React.FC = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/faq" element={<Faq />} />
+            <Route path="/sample" element={<Sample />} />
+            <Route path="/checkout" element={<Checkout />} />
 
              </Routes>
            

@@ -1,14 +1,18 @@
 {/*  primary: {"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#93c5fd","400":"#60a5fa","500":"#3b82f6","600":"#2563eb","700":"#1d4ed8","800":"#1e40af","900":"#1e3a8a","950":"#172554"}
       */}
 
+import ComplexNavbar from "../Shared/Header"
+import { FooterWithSitemap } from "../Shared/Footer"
 
 
 
 
+export const Checkout = () => (
 
-export const Foo = () => (
-    <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
-      <form action="#" className="mx-auto max-w-screen-xl px-4 2xl:px-0">
+  <>
+<ComplexNavbar />
+    <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16 ">
+      <form action="#" className="mx-auto max-w-screen-xl px-4 2xl:px-0 mt-10">
         <ol className="items-center flex w-full max-w-2xl text-center text-sm font-medium text-gray-500 dark:text-gray-400 sm:text-base">
           <li className="after:border-1 flex items-center text-primary-700 after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 dark:text-primary-500 dark:after:border-gray-700 sm:after:inline-block sm:after:content-[''] md:w-full xl:after:mx-10">
             <span className="flex items-center after:mx-2 after:text-gray-200 after:content-['/'] dark:after:text-gray-500 sm:after:hidden">
@@ -29,7 +33,7 @@ export const Foo = () => (
                   d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                 />
               </svg>
-              Cart
+              Carrinho
             </span>
           </li>
           <li className="after:border-1 flex items-center text-primary-700 after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 dark:text-primary-500 dark:after:border-gray-700 sm:after:inline-block sm:after:content-[''] md:w-full xl:after:mx-10">
@@ -72,14 +76,14 @@ export const Foo = () => (
                 d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
               />
             </svg>
-            Order summary
+            Resumo do pedido
           </li>
         </ol>
         <div className="mt-6 sm:mt-8 lg:flex lg:items-start lg:gap-12 xl:gap-16">
           <div className="min-w-0 flex-1 space-y-8">
             <div className="space-y-4">
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                Delivery Details
+              Detalhes de entrega
               </h2>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
@@ -88,13 +92,13 @@ export const Foo = () => (
                     className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                   >
                     {" "}
-                    Your name{" "}
+                    Seu nome{" "}
                   </label>
                   <input
                     type="text"
                     id="your_name"
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-                    placeholder="Bonnie Green"
+                    placeholder="Ana Carla"
                     required=""
                   />
                 </div>
@@ -104,13 +108,13 @@ export const Foo = () => (
                     className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                   >
                     {" "}
-                    Your email*{" "}
+                    Seu e-mail*{" "}
                   </label>
                   <input
                     type="email"
                     id="your_email"
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-                    placeholder="name@flowbite.com"
+                    placeholder="Ana@gmail.com"
                     required=""
                   />
                 </div>
@@ -121,18 +125,16 @@ export const Foo = () => (
                       className="block text-sm font-medium text-gray-900 dark:text-white"
                     >
                       {" "}
-                      Country*{" "}
+                      País*{" "}
                     </label>
                   </div>
                   <select
                     id="select-country-input-3"
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                   >
-                    <option selected="">United States</option>
-                    <option value="AS">Australia</option>
-                    <option value="FR">France</option>
-                    <option value="ES">Spain</option>
-                    <option value="UK">United Kingdom</option>
+                    <option selected="">Moçambique</option>
+                    <option value="AS">Africa do Sul</option>
+                    
                   </select>
                 </div>
                 <div>
@@ -142,18 +144,23 @@ export const Foo = () => (
                       className="block text-sm font-medium text-gray-900 dark:text-white"
                     >
                       {" "}
-                      City*{" "}
+                      Provincia*{" "}
                     </label>
                   </div>
                   <select
                     id="select-city-input-3"
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                   >
-                    <option selected="">San Francisco</option>
-                    <option value="NY">New York</option>
-                    <option value="LA">Los Angeles</option>
-                    <option value="CH">Chicago</option>
-                    <option value="HU">Houston</option>
+                    <option selected="">Maputo</option>
+                    <option value="GZ">Gaza</option>
+                    <option value="IN">Inhambane</option>
+                    <option value="MN">Manica</option>
+                    <option value="SF">Sofala</option>
+                    <option value="TT">Tete</option>
+                    <option value="ZB">Zambezia</option>
+                    <option value="NP">Nampula</option>
+                    <option value="NS">Niassa</option>
+                    <option value="CD">Cabo Delgado</option>
                   </select>
                 </div>
                 <div>
@@ -162,7 +169,7 @@ export const Foo = () => (
                     className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                   >
                     {" "}
-                    Phone Number*{" "}
+                    Número de telefone*{" "}
                   </label>
                   <div className="flex items-center">
                     <button
@@ -262,7 +269,7 @@ export const Foo = () => (
                           </filter>
                         </defs>
                       </svg>
-                      +1
+                      +258
                       <svg
                         className="-me-0.5 ms-2 h-4 w-4"
                         aria-hidden="true"
@@ -387,7 +394,7 @@ export const Foo = () => (
                                   </filter>
                                 </defs>
                               </svg>
-                              United States (+1)
+                              Moz (+258)
                             </span>
                           </button>
                         </li>
@@ -768,13 +775,13 @@ export const Foo = () => (
                     className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                   >
                     {" "}
-                    Company name{" "}
+                    Nome da empresa{" "}
                   </label>
                   <input
                     type="text"
                     id="company_name"
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-                    placeholder="Flowbite LLC"
+                    placeholder="MozPro LDA"
                     required=""
                   />
                 </div>
@@ -784,20 +791,20 @@ export const Foo = () => (
                     className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                   >
                     {" "}
-                    VAT number{" "}
+                    Número de BI {" "}
                   </label>
                   <input
                     type="text"
                     id="vat_number"
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-                    placeholder="DE42313253"
+                    placeholder="090123123123A"
                     required=""
                   />
                 </div>
-                <div className="sm:col-span-2">
+                <div className="sm:col-span-2 ">
                   <button
                     type="submit"
-                    className="flex w-full items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+                    className="flex w-full items-center justify-center gap-2 rounded-lg border border-gray-200 bg-darkbtncolorlm px-5 py-2.5 text-sm font-medium text-white hover:bg-bgHoverlm hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-bgHoverlm dark:hover:text-white dark:focus:ring-gray-700"
                   >
                     <svg
                       className="h-5 w-5"
@@ -816,14 +823,14 @@ export const Foo = () => (
                         d="M5 12h14m-7 7V5"
                       />
                     </svg>
-                    Add new address
+                    Adicionar novo endereço
                   </button>
                 </div>
               </div>
             </div>
             <div className="space-y-4">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                Payment
+              Pagamento
               </h3>
               <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 ps-4 dark:border-gray-700 dark:bg-gray-800">
@@ -845,13 +852,13 @@ export const Foo = () => (
                         className="font-medium leading-none text-gray-900 dark:text-white"
                       >
                         {" "}
-                        Credit Card{" "}
+                        Cartão de crédito{" "}
                       </label>
                       <p
                         id="credit-card-text"
                         className="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400"
                       >
-                        Pay with your credit card
+                        Pague com seu cartão de crédito
                       </p>
                     </div>
                   </div>
@@ -860,14 +867,14 @@ export const Foo = () => (
                       type="button"
                       className="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                     >
-                      Delete
+                      Apagar
                     </button>
                     <div className="h-3 w-px shrink-0 bg-gray-200 dark:bg-gray-700" />
                     <button
                       type="button"
                       className="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                     >
-                      Edit
+                      Editar
                     </button>
                   </div>
                 </div>
@@ -889,13 +896,13 @@ export const Foo = () => (
                         className="font-medium leading-none text-gray-900 dark:text-white"
                       >
                         {" "}
-                        Payment on delivery{" "}
+                        Mpesa{" "}
                       </label>
                       <p
                         id="pay-on-delivery-text"
                         className="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400"
                       >
-                        +$15 payment processing fee
+                        +5 Mzn  Taxa de processamento de pagamento
                       </p>
                     </div>
                   </div>
@@ -904,14 +911,14 @@ export const Foo = () => (
                       type="button"
                       className="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                     >
-                      Delete
+                      Apagar
                     </button>
                     <div className="h-3 w-px shrink-0 bg-gray-200 dark:bg-gray-700" />
                     <button
                       type="button"
                       className="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                     >
-                      Edit
+                      Editar
                     </button>
                   </div>
                 </div>
@@ -933,13 +940,13 @@ export const Foo = () => (
                         className="font-medium leading-none text-gray-900 dark:text-white"
                       >
                         {" "}
-                        Paypal account{" "}
+                        Conta do Paypal{" "}
                       </label>
                       <p
                         id="paypal-text"
                         className="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400"
                       >
-                        Connect to your account
+                        Conecte-se à sua conta
                       </p>
                     </div>
                   </div>
@@ -948,32 +955,30 @@ export const Foo = () => (
                       type="button"
                       className="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                     >
-                      Delete
+                      Apagar
                     </button>
                     <div className="h-3 w-px shrink-0 bg-gray-200 dark:bg-gray-700" />
                     <button
                       type="button"
                       className="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                     >
-                      Edit
+                      Editar
                     </button>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                Delivery Methods
-              </h3>
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+
+
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 ps-4 dark:border-gray-700 dark:bg-gray-800">
                   <div className="flex items-start">
                     <div className="flex h-5 items-center">
                       <input
-                        id="dhl"
-                        aria-describedby="dhl-text"
+                        id="m-kesh"
+                        aria-describedby="m-kesh-text"
                         type="radio"
-                        name="delivery-method"
+                        name="payment-method"
                         defaultValue=""
                         className="h-4 w-4 border-gray-300 bg-white text-primary-600 focus:ring-2 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
                         defaultChecked=""
@@ -981,88 +986,139 @@ export const Foo = () => (
                     </div>
                     <div className="ms-4 text-sm">
                       <label
-                        htmlFor="dhl"
+                        htmlFor="credit-card"
                         className="font-medium leading-none text-gray-900 dark:text-white"
                       >
                         {" "}
-                        $15 - DHL Fast Delivery{" "}
+                        M-kesh{" "}
                       </label>
                       <p
-                        id="dhl-text"
+                        id="credit-card-text"
                         className="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400"
                       >
-                        Get it by Tommorow
+                       +5 Mzn  Taxa de processamento de pagamento
                       </p>
                     </div>
+                  </div>
+                  <div className="mt-4 flex items-center gap-2">
+                    <button
+                      type="button"
+                      className="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                    >
+                      Apagar
+                    </button>
+                    <div className="h-3 w-px shrink-0 bg-gray-200 dark:bg-gray-700" />
+                    <button
+                      type="button"
+                      className="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                    >
+                      Editar
+                    </button>
                   </div>
                 </div>
                 <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 ps-4 dark:border-gray-700 dark:bg-gray-800">
                   <div className="flex items-start">
                     <div className="flex h-5 items-center">
                       <input
-                        id="fedex"
-                        aria-describedby="fedex-text"
+                        id="pay-on-delivery"
+                        aria-describedby="pay-on-delivery-text"
                         type="radio"
-                        name="delivery-method"
+                        name="payment-method"
                         defaultValue=""
                         className="h-4 w-4 border-gray-300 bg-white text-primary-600 focus:ring-2 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
                       />
                     </div>
                     <div className="ms-4 text-sm">
                       <label
-                        htmlFor="fedex"
+                        htmlFor="pay-on-delivery"
                         className="font-medium leading-none text-gray-900 dark:text-white"
                       >
                         {" "}
-                        Free Delivery - FedEx{" "}
+                        Emola{" "}
                       </label>
                       <p
-                        id="fedex-text"
+                        id="pay-on-delivery-text"
                         className="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400"
                       >
-                        Get it by Friday, 13 Dec 2023
+                        +5 Mzn  Taxa de processamento de pagamento
                       </p>
                     </div>
+                  </div>
+                  <div className="mt-4 flex items-center gap-2">
+                    <button
+                      type="button"
+                      className="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                    >
+                      Apagar
+                    </button>
+                    <div className="h-3 w-px shrink-0 bg-gray-200 dark:bg-gray-700" />
+                    <button
+                      type="button"
+                      className="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                    >
+                      Editar
+                    </button>
                   </div>
                 </div>
                 <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 ps-4 dark:border-gray-700 dark:bg-gray-800">
                   <div className="flex items-start">
                     <div className="flex h-5 items-center">
                       <input
-                        id="express"
-                        aria-describedby="express-text"
+                        id="paypal-2"
+                        aria-describedby="paypal-text"
                         type="radio"
-                        name="delivery-method"
+                        name="payment-method"
                         defaultValue=""
                         className="h-4 w-4 border-gray-300 bg-white text-primary-600 focus:ring-2 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
                       />
                     </div>
                     <div className="ms-4 text-sm">
                       <label
-                        htmlFor="express"
+                        htmlFor="paypal-2"
                         className="font-medium leading-none text-gray-900 dark:text-white"
                       >
                         {" "}
-                        $49 - Express Delivery{" "}
+                        BIM {" "}
                       </label>
                       <p
-                        id="express-text"
+                        id="paypal-text"
                         className="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400"
                       >
-                        Get it today
+                        Conecte-se à sua conta
                       </p>
                     </div>
+                  </div>
+                  <div className="mt-4 flex items-center gap-2">
+                    <button
+                      type="button"
+                      className="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                    >
+                      Apagar
+                    </button>
+                    <div className="h-3 w-px shrink-0 bg-gray-200 dark:bg-gray-700" />
+                    <button
+                      type="button"
+                      className="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                    >
+                      Editar
+                    </button>
                   </div>
                 </div>
               </div>
-            </div>
+
+
+
+
+
+
+
             <div>
               <label
                 htmlFor="voucher"
                 className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
               >
                 {" "}
-                Enter a gift card, voucher or promotional code{" "}
+                Insira um cartão-presente, voucher ou código promocional{" "}
               </label>
               <div className="flex max-w-md items-center gap-4">
                 <input
@@ -1074,9 +1130,9 @@ export const Foo = () => (
                 />
                 <button
                   type="button"
-                  className="flex items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  className="flex items-center  justify-center rounded-lg bg-darkbtncolorlm px-5 py-2.5 text-sm font-medium text-white hover:bg-bgHoverlm focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
-                  Apply
+                  Aplicar
                 </button>
               </div>
             </div>
@@ -1089,37 +1145,23 @@ export const Foo = () => (
                     Subtotal
                   </dt>
                   <dd className="text-base font-medium text-gray-900 dark:text-white">
-                    $8,094.00
+                    8,094.00 Mzn
                   </dd>
                 </dl>
                 <dl className="flex items-center justify-between gap-4 py-3">
                   <dt className="text-base font-normal text-gray-500 dark:text-gray-400">
-                    Savings
+                  Economias
                   </dt>
-                  <dd className="text-base font-medium text-green-500">0</dd>
+                  <dd className="text-base font-medium text-green-500">0 Mzn</dd>
                 </dl>
-                <dl className="flex items-center justify-between gap-4 py-3">
-                  <dt className="text-base font-normal text-gray-500 dark:text-gray-400">
-                    Store Pickup
-                  </dt>
-                  <dd className="text-base font-medium text-gray-900 dark:text-white">
-                    $99
-                  </dd>
-                </dl>
-                <dl className="flex items-center justify-between gap-4 py-3">
-                  <dt className="text-base font-normal text-gray-500 dark:text-gray-400">
-                    Tax
-                  </dt>
-                  <dd className="text-base font-medium text-gray-900 dark:text-white">
-                    $199
-                  </dd>
-                </dl>
+
+                
                 <dl className="flex items-center justify-between gap-4 py-3">
                   <dt className="text-base font-bold text-gray-900 dark:text-white">
                     Total
                   </dt>
                   <dd className="text-base font-bold text-gray-900 dark:text-white">
-                    $8,392.00
+                    8,094.00 Mzn
                   </dd>
                 </dl>
               </div>
@@ -1127,25 +1169,30 @@ export const Foo = () => (
             <div className="space-y-3">
               <button
                 type="submit"
-                className="flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4  focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                className="flex w-full items-center justify-center rounded-lg bg-primary-700 dark:bg-darklinkcolorlm dark:hover:bg-bgHoverlm px-5 py-2.5 text-sm font-medium text-white bg-black hover:bg-bgHoverlm focus:outline-none focus:ring-4  focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
-                Proceed to Payment
+                Prossiga para o pagamento
               </button>
               <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
-                One or more items in your cart require an account.{" "}
+              Um ou mais itens no seu carrinho requerem uma conta. {" "}
                 <a
                   href="#"
                   title=""
-                  className="font-medium text-primary-700 underline hover:no-underline dark:text-primary-500"
+                  className="font-medium text-primary-700 underline hover:no-underline dark:text-linkdm hover:font-bold"
                 >
-                  Sign in or create an account now.
+                  Faça login ou crie uma conta agora.
                 </a>
                 .
               </p>
             </div>
           </div>
+          
         </div>
+        
       </form>
+      
     </section>
-  )
+    <FooterWithSitemap />
+    </> 
+  );
   
