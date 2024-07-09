@@ -6,11 +6,10 @@ const Pricing = () => {
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
         <div className="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-            Designed for business teams like yours
+          Conhecimento em Foco: Capacitando através da Tecnologia e Inovação
           </h2>
           <p className="mb-5 font-light text-gray-500 sm:text-xl dark:text-gray-400">
-            Here at Flowbite we focus on markets where technology, innovation, and
-            capital can unlock long-term value and drive economic growth.
+          Aqui na Pro Mindset, focamos em mercados onde a tecnologia, a inovação e o conhecimento podem desbloquear valor a longo prazo e impulsionar o crescimento intelectual e profissional.
           </p>
         </div>
         <div className="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
@@ -22,7 +21,7 @@ const Pricing = () => {
             </p>
             <div className="flex justify-center items-baseline my-8">
               <span className="mr-2 text-5xl font-extrabold">$10</span>
-              <span className="text-gray-500 dark:text-gray-400">/month</span>
+              <span className="text-gray-500 dark:text-gray-400">/mês</span>
             </div>
             {/* Features List */}
             <ul role="list" className="mb-8 space-y-4 text-left">
@@ -60,7 +59,7 @@ const Pricing = () => {
             </p>
             <div className="flex justify-center items-baseline my-8">
               <span className="mr-2 text-5xl font-extrabold">$29</span>
-              <span className="text-gray-500 dark:text-gray-400">/month</span>
+              <span className="text-gray-500 dark:text-gray-400">/mês</span>
             </div>
             {/* Features List */}
             <ul role="list" className="mb-8 space-y-4 text-left">
@@ -97,7 +96,7 @@ const Pricing = () => {
             </p>
             <div className="flex justify-center items-baseline my-8">
               <span className="mr-2 text-5xl font-extrabold">$49</span>
-              <span className="text-gray-500 dark:text-gray-400">/month</span>
+              <span className="text-gray-500 dark:text-gray-400">/mês</span>
             </div>
             {/* Features List */}
             <ul role="list" className="mb-8 space-y-4 text-left">

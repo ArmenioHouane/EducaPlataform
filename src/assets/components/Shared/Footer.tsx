@@ -17,6 +17,7 @@ const SITEMAP = [
       { label: "Twitter", url: "#" },
       { label: "GitHub", url: "#" },
       { label: "Entre em Contacto", route: "/contact" },
+      { label: "FAQ", route: "/faq" },
     ],
   },
   {

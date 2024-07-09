@@ -10,6 +10,7 @@ import Contact from './assets/components/pages/Contact';
 import Profile from './assets/components/pages/Profile';
 import Login from './assets/components/pages/Login';
 import Pricing from './assets/components/pages/Pricing';
+import { Faq } from './assets/components/pages/faq';
 
 const App: React.FC = () => {
   return (
@@ -25,6 +26,7 @@ const App: React.FC = () => {
             <Route path="/feature" element={<Feature />} />
             <Route path="/login" element={<Login />} />
             <Route path="/pricing" element={<Pricing />} />
+            <Route path="/faq" element={<Faq />} />
 
              </Routes>
            
