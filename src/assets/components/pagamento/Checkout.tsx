@@ -3,6 +3,9 @@
 
 import ComplexNavbar from "../Shared/Header"
 import { FooterWithSitemap } from "../Shared/Footer"
+import { Button } from "@material-tailwind/react";
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -1167,18 +1170,21 @@ export const Checkout = () => (
               </div>
             </div>
             <div className="space-y-3">
-              <button
-                type="submit"
-                className="flex w-full items-center justify-center rounded-lg bg-primary-700 dark:bg-darklinkcolorlm dark:hover:bg-bgHoverlm px-5 py-2.5 text-sm font-medium text-white bg-black hover:bg-bgHoverlm focus:outline-none focus:ring-4  focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-              >
-                Prossiga para o pagamento
-              </button>
+
+            <Link to="/pagar">
+        <Button
+          
+          className="flex w-full items-center justify-center rounded-lg bg-primary-700 dark:bg-darklinkcolorlm dark:hover:bg-bgHoverlm px-5 py-2.5 text-sm font-medium text-white bg-black hover:bg-bgHoverlm focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+        >
+          <span>Prossiga para o pagamento</span>
+        </Button>
+      </Link>
               <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
               Um ou mais itens no seu carrinho requerem uma conta. {" "}
                 <a
                   href="#"
                   title=""
-                  className="font-medium text-primary-700 underline hover:no-underline dark:text-linkdm hover:font-bold"
+                  className="font-medium text-primary-700  underline hover:no-underline dark:text-linkdm hover:font-bold"
                 >
                   Faça login ou crie uma conta agora.
                 </a>

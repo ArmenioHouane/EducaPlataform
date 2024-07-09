@@ -12,7 +12,9 @@ import Login from './assets/components/pages/Login';
 import Pricing from './assets/components/pages/Pricing';
 import { Faq } from './assets/components/pages/faq';
 import { Sample } from './assets/components/Dashboard/Sample';
-import { Checkout } from './assets/components/pages/Checkout';
+import { Checkout } from './assets/components/pagamento/Checkout';
+import Pagar from './assets/components/pagamento/Pagar';
+import Pagamentoconfirmado from './assets/components/pagamento/pagamento';
 
 const App: React.FC = () => {
   return (
@@ -31,6 +33,8 @@ const App: React.FC = () => {
             <Route path="/faq" element={<Faq />} />
             <Route path="/sample" element={<Sample />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/pagar" element={<Pagar />} />
+            <Route path="/pagamentoconfirmado" element={<Pagamentoconfirmado />} />
 
              </Routes>
            
