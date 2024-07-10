@@ -24,7 +24,7 @@ const Cursos: React.FC = () => {
         <div className="bg-white dark:bg-gray-800 text-black dark:text-white">
             <ComplexNavbar />
             <div className="container mx-auto py-12">
-                <div className="text-center">
+                <div className="text-center mt-10">
                     <h1 className="text-3xl font-bold mb-4">Cursos de Idiomas</h1>
                     <p className="text-lg mb-8">
                         Bem-vindo à nossa plataforma de cursos de línguas, onde exploramos o mundo através das palavras. Descubra uma ampla gama de cursos projetados para todos os níveis, desde iniciantes até avançados, em idiomas como inglês, espanhol, francês, alemão e muitos outros. Aprenda de forma interativa com instrutores experientes, materiais de estudo envolventes e tecnologia de ponta, tudo projetado para ajudá-lo a alcançar fluência e confiança na língua de sua escolha. Prepare-se para expandir seus horizontes linguísticos conosco!

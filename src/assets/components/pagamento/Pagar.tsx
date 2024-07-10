@@ -8,27 +8,27 @@ export const Pagar = () => (
     <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
       <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <div className="mx-auto max-w-5xl">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Payment</h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Pagamento</h2>
           <div className="mt-6 sm:mt-8 lg:flex lg:items-start lg:gap-12">
             <form action="#" className="w-full rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6 lg:max-w-xl lg:p-8">
               <div className="mb-6 grid grid-cols-2 gap-4">
                 <div className="col-span-2 sm:col-span-1">
-                  <label htmlFor="full_name" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Full name (as displayed on card)*</label>
-                  <input type="text" id="full_name" className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" placeholder="Bonnie Green" required />
+                  <label htmlFor="full_name" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Nome completo (como exibido no cartão)*</label>
+                  <input type="text" id="full_name" className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" placeholder="Ana Carla" required />
                 </div>
                 <div className="col-span-2 sm:col-span-1">
-                  <label htmlFor="card-number-input" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Card number*</label>
+                  <label htmlFor="card-number-input" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Número do cartão*</label>
                   <input type="text" id="card-number-input" className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pe-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" placeholder="xxxx-xxxx-xxxx-xxxx" pattern="^4[0-9]{12}(?:[0-9]{3})?$" required />
                 </div>
                 <div>
-                  <label htmlFor="card-expiration-input" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Card expiration*</label>
+                  <label htmlFor="card-expiration-input" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Data de validade do cartão*</label>
                   <div className="relative">
                     <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3.5">
                       <svg className="h-4 w-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill="currentColor" viewBox="0 0 24 24">
                         <path fillRule="evenodd" d="M5 5a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1 2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2ZM3 19v-7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm6.01-6a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm-10 4a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z" clipRule="evenodd" />
                       </svg>
                     </div>
-                    <input datepicker datepicker-format="mm/yy" id="card-expiration-input" type="text" className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 ps-9 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500" placeholder="12/23" required />
+                    <input datepicker datepicker-format="mm/yy" id="card-expiration-input" type="text" className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 ps-9 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500" placeholder="12/24" required />
                   </div>
                 </div>
                 <div>
@@ -49,7 +49,7 @@ export const Pagar = () => (
               </div>
 
               <Link to="/pagamentoconfirmado">
-              <button type="submit" className="flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 bg-black hover:bg-bgHoverlm dark:bg-bgHoverlm dark:hover:bg-black dark:focus:ring-primary-800">Pay now</button>
+              <button type="submit" className="flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 bg-black hover:bg-bgHoverlm dark:bg-bgHoverlm dark:hover:bg-black dark:focus:ring-primary-800">Pagar agora</button>
             
               </Link>
             
@@ -58,27 +58,27 @@ export const Pagar = () => (
               <div className="space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-800">
                 <div className="space-y-2">
                   <dl className="flex items-center justify-between gap-4">
-                    <dt className="text-base font-normal text-gray-500 dark:text-gray-400">Original price</dt>
-                    <dd className="text-base font-medium text-gray-900 dark:text-white">$6,592.90</dd>
+                    <dt className="text-base font-normal text-gray-500 dark:text-gray-400">Preço original</dt>
+                    <dd className="text-base font-medium text-gray-900 dark:text-white">6,592.00 Mzn</dd>
                   </dl>
                   <dl className="flex items-center justify-between gap-4">
-                    <dt className="text-base font-normal text-gray-500 dark:text-gray-400">Discount</dt>
+                    <dt className="text-base font-normal text-gray-500 dark:text-gray-400">Desconto</dt>
                     <dd className="flex items-center gap-3 text-base font-medium text-gray-900 dark:text-white">
                       <span className="inline-flex items-center rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300">25%</span>
-                      <span>$1,648.22</span>
+                      <span>1,648.22 Mzn</span>
                     </dd>
                   </dl>
                 </div>
                 <div className="flex items-center justify-between gap-4 pt-4">
-                  <span className="text-base font-medium text-gray-900 dark:text-white">Total Amount</span>
-                  <span className="text-2xl font-bold text-gray-900 dark:text-white">$4,944.68</span>
+                  <span className="text-base font-medium text-gray-900 dark:text-white">Valor Total</span>
+                  <span className="text-2xl font-bold text-gray-900 dark:text-white">4,944.68 Mzn</span>
                 </div>
               </div>
               <figure className="mt-8 flex items-center space-x-4">
                 <img className="h-10 w-auto rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Green avatar" />
                 <blockquote className="text-gray-500 dark:text-gray-400">
-                  <p className="text-sm font-medium">"Buying our products is made easy with the flexibility of payment options. You can pay online, or pay with cash on delivery. Our support team is always here to help."</p>
-                  <figcaption className="mt-1 text-sm font-medium text-gray-900 dark:text-white">Bonnie Green, CEO</figcaption>
+                  <p className="text-sm font-medium">"Nosso compromisso é fornecer uma plataforma de ensino acessível e de alta qualidade. Com várias opções de pagamento, estamos aqui para facilitar sua jornada de aprendizado."</p>
+                  <figcaption className="mt-1 text-sm font-medium text-gray-900 dark:text-white">Ana Carla, CEO</figcaption>
                 </blockquote>
               </figure>
             </div>
