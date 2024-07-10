@@ -27,6 +27,8 @@ module.exports = withMT({
  bgHoverlm: '#1F75FE', // Hover button
  bgHoverdm: '#87CEEB', // Hover button
  linkdm: '#1F71F3',
+ blacklg: '#171717',
+ blackbg: '#262626',
 
  // Light Mode Colors
  backWhitelm: '#F5F4FE', // Light Mode Background

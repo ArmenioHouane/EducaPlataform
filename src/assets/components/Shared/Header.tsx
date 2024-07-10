@@ -269,7 +269,7 @@ export function ComplexNavbar() {
             <span>Login</span>
           </Button>
         </Link>
-        <Link to="/sign-up">
+        <Link to="/signup">
           <Button size="sm" variant="gradient" className="hidden lg:inline-block">
             <span>Regista-te</span>
           </Button>

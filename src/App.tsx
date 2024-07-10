@@ -8,13 +8,16 @@ import Cursos from './assets/components/pages/Cursos';
 import Feature from './assets/components/pages/Feature';
 import Contact from './assets/components/pages/Contact';
 import Profile from './assets/components/pages/Profile';
-import Login from './assets/components/pages/Login';
+import Login from './assets/components/Auth/Login';
 import Pricing from './assets/components/pages/Pricing';
 import { Faq } from './assets/components/pages/faq';
 import { Sample } from './assets/components/Dashboard/Sample';
 import { Checkout } from './assets/components/pagamento/Checkout';
 import Pagar from './assets/components/pagamento/Pagar';
 import Pagamentoconfirmado from './assets/components/pagamento/pagamento';
+import { Signup } from './assets/components/Auth/Signup';
+import Recovery from './assets/components/Auth/Recovery';
+import Change from './assets/components/Auth/Alterar';
 
 const App: React.FC = () => {
   return (
@@ -35,6 +38,10 @@ const App: React.FC = () => {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/pagar" element={<Pagar />} />
             <Route path="/pagamentoconfirmado" element={<Pagamentoconfirmado />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/recovery" element={<Recovery />} />
+            <Route path="/change" element={<Change />} />
+
 
              </Routes>
            
