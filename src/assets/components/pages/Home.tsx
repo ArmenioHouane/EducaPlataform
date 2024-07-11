@@ -1,4 +1,3 @@
-import React from 'react';
 import { ComplexNavbar } from '../Shared/Header';
 import { FooterWithSitemap } from '../Shared/Footer';
 import Feature from './Feature';
