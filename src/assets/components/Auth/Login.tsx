@@ -1,5 +1,4 @@
 // src/components/Login.js
-import React from 'react';
 import { ComplexNavbar } from '../Shared/Header';
 import { FooterWithSitemap } from '../Shared/Footer';
 
@@ -14,7 +13,7 @@ const Login = () => (
         <p className="mt-2 text-sm text-gray-600 dark:text-neutral-400">
           Ainda não tem uma conta?
           <a
-            className="text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500"
+            className="text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500 ml-1"
             href="/signup"
           >
             Cadastre-se aqui
@@ -72,7 +71,7 @@ const Login = () => (
                   id="email"
                   name="email"
                   className="py-3 px-4 block w-full border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:bg-blacklg dark:focus:ring-neutral-600"
-                  required=""
+                  required={true}
                   placeholder='nome@gmail.com'
                   aria-describedby="email-error"
                 />
@@ -116,7 +115,7 @@ const Login = () => (
                   id="password"
                   name="password"
                   className="py-3 px-4 block w-full border dark:bg-blacklg border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                  required=""
+                  required={true}
                   placeholder="********"
                   aria-describedby="password-error"
                 />
@@ -149,7 +148,7 @@ const Login = () => (
         {/* Fim do Formulário */}
       </div>
     </div>
-    <FooterWithSitemap /> {/* Inclua seu componente FooterWithSitemap aqui */}
+     <FooterWithSitemap /> {/* Inclua seu componente FooterWithSitemap aqui */}
   </div>
 );
 

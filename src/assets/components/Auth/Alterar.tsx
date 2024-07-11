@@ -1,5 +1,4 @@
 // src/components/Login.js
-import React from 'react';
 import { ComplexNavbar } from '../Shared/Header';
 import { FooterWithSitemap } from '../Shared/Footer';
 
@@ -8,7 +7,7 @@ const Change = () => (
     <ComplexNavbar /> {/* Inclua seu componente ComplexNavbar aqui */}
     <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
       
-      <div className="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 w-96 dark:bg-gray-800 dark:border-gray-700 sm:p-8">
+      <div className="p-6 bg-white rounded-lg shadow dark:border md:mt-0 w-96 dark:bg-gray-800 dark:border-gray-700 sm:p-8">
         <h2 className="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">
           Alterar Senha
         </h2>
@@ -26,7 +25,7 @@ const Change = () => (
               id="email"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="nome@empresa.com"
-              required=""
+              required={true}
             />
           </div>
           <div>
@@ -42,7 +41,7 @@ const Change = () => (
               id="password"
               placeholder="••••••••"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required=""
+              required={true}
             />
           </div>
           <div>
@@ -58,7 +57,7 @@ const Change = () => (
               id="confirm-password"
               placeholder="••••••••"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required=""
+              required={true}
             />
           </div>
           <div className="flex items-start">
@@ -68,7 +67,7 @@ const Change = () => (
                 aria-describedby="newsletter"
                 type="checkbox"
                 className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                required=""
+                required={true}
               />
             </div>
             <div className="ml-3 text-sm">

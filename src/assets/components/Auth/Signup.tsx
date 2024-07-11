@@ -75,7 +75,7 @@ export const Signup = () => (
                     id="email"
                     name="email"
                     className="py-3 px-4 block w-full border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:bg-blacklg dark:focus:ring-neutral-600"
-                    required=""
+                    required={true}
                     placeholder="nome@gmail.com"
                     aria-describedby="email-error"
                   />
@@ -111,7 +111,7 @@ export const Signup = () => (
                     id="password"
                     name="password"
                     className="py-3 px-4 block w-full border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:bg-blacklg dark:focus:ring-neutral-600"
-                    required=""
+                    required={true}
                     placeholder="**********"
                     aria-describedby="password-error"
                   />
@@ -147,7 +147,7 @@ export const Signup = () => (
                     id="confirm-password"
                     name="confirm-password"
                     className="py-3 px-4 block w-full border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:bg-blacklg dark:focus:ring-neutral-600"
-                    required=""
+                    required={true}
                     placeholder="**********"
                     aria-describedby="confirm-password-error"
                   />
@@ -176,7 +176,7 @@ export const Signup = () => (
               <div className="text-right">
                 <button
                   type="submit"
-                  className="inline-flex items-center py-3 px-6 text-sm font-medium rounded-lg border border-transparent transition-colors bg-blue-600 text-white dark:bg-neutral-700 dark:border-neutral-600 dark:text-white dark:hover:bg-neutral-800 dark:hover:border-neutral-600 focus:ring-blue-500 hover:bg-black focus:ring-2 focus:ring-opacity-50"
+                  className="inline-flex justify-center items-center py-3 px-6 text-sm font-medium rounded-lg border border-transparent transition-colors bg-blue-600 text-white dark:bg-neutral-700 dark:border-neutral-600 dark:text-white dark:hover:bg-neutral-800 dark:hover:border-neutral-600 focus:ring-blue-500 hover:bg-black focus:ring-2 focus:ring-opacity-50 w-full text-center"
                 >
                   Criar Conta
                 </button>
