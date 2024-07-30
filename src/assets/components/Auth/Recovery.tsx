@@ -1,10 +1,8 @@
 // src/components/Login.js
-import { ComplexNavbar } from '../Shared/Header';
-import { FooterWithSitemap } from '../Shared/Footer';
 
 const Recovery = () => (
   <div className="flex flex-col items-center justify-center min-h-screen bg-backWhitelm dark:bg-blackbg">
-    <ComplexNavbar /> {/* Inclua seu componente ComplexNavbar aqui */}
+     {/*<ComplexNavbar /> Inclua seu componente ComplexNavbar aqui */}
     <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
       
       <div className="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 dark:bg-gray-800 dark:border-gray-700 sm:p-8">
@@ -60,10 +58,18 @@ const Recovery = () => (
           >
             Recuperar senha
           </button>
+          <div className="text-center">
+                <a
+                  className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                  href="/login"
+                >
+                  Esqueceu a senha?
+                </a>
+              </div>
         </form>
       </div>
     </div>
-    <FooterWithSitemap /> {/* Inclua seu componente FooterWithSitemap aqui */}
+     {/*<FooterWithSitemap /> Inclua seu componente FooterWithSitemap aqui */}
   </div>
 );
 

@@ -1,12 +1,13 @@
 import { ComplexNavbar } from '../Shared/Header';
 import { FooterWithSitemap } from '../Shared/Footer';
+import { Link } from 'react-router-dom';
 
 
 
 
 
 export const Signup = () => (
-    <> <ComplexNavbar />
+    <> {/*<ComplexNavbar >*/}
     
     <div className="flex flex-col items-center justify-center min-w-80   min-h-screen bg-backWhitelm dark:bg-blackbg">
       <div className="mt-20 mb-10 bg-white dark:bg-blacklg rounded-lg shadow-lg p-8 w-96  mx-auto">
@@ -173,6 +174,33 @@ export const Signup = () => (
               </div>
               {/* Fim do Grupo de Formulário */}
               {/* Grupo de Formulário */}
+
+              <div className="flex items-start">
+            <div className="flex items-center h-5">
+              <input
+                id="newsletter"
+                aria-describedby="newsletter"
+                type="checkbox"
+                className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                required={true}
+              />
+            </div>
+            <div className="ml-3 text-sm">
+              <label
+                htmlFor="newsletter"
+                className="font-light text-gray-500 dark:text-gray-300"
+              >
+                Eu aceito os{" "}
+                <a
+                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  href="#"
+                >
+                  Termos e Condições
+                </a>
+              </label>
+            </div>
+          </div>
+
               <div className="text-right">
                 <button
                   type="submit"
@@ -187,9 +215,14 @@ export const Signup = () => (
           {/* Fim do Formulário */}
         </div>
       </div>
+
+      <Link to="../">
+        <h2 className='hover:text-light-blue-600'>Moz Educa</h2>
+      </Link>
+
     </div>
     
-    <FooterWithSitemap /> 
+    {/*<FooterWithSitemap /> */}
     </>
   )
   

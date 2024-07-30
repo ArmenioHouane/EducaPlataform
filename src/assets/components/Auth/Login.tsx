@@ -1,10 +1,11 @@
 // src/components/Login.js
 import { ComplexNavbar } from '../Shared/Header';
 import { FooterWithSitemap } from '../Shared/Footer';
+import { Link } from 'react-router-dom';
 
 const Login = () => (
   <div className="flex flex-col items-center justify-center min-h-screen bg-backWhitelm dark:bg-blackbg">
-    <ComplexNavbar /> {/* Inclua seu componente ComplexNavbar aqui */}
+     {/*<ComplexNavbar /> Inclua seu componente ComplexNavbar aqui */}
     <div className="mt-20 mb-10 bg-white dark:bg-blacklg rounded-lg shadow-lg p-8 max-w-sm mx-auto">
       <div className="text-center">
         <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
@@ -148,7 +149,11 @@ const Login = () => (
         {/* Fim do Formulário */}
       </div>
     </div>
-     <FooterWithSitemap /> {/* Inclua seu componente FooterWithSitemap aqui */}
+    {/*Qaundo tivermos um logo, iremos substituir o text pelo logo*/}
+    <Link to="../">
+        <h2 className='hover:text-light-blue-600'>Moz Educa</h2>
+      </Link>
+      {/*<FooterWithSitemap /> Inclua seu componente FooterWithSitemap aqui */}
   </div>
 );
 
