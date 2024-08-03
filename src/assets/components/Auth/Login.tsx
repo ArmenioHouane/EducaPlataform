@@ -1,11 +1,82 @@
 // src/components/Login.js
-import { ComplexNavbar } from '../Shared/Header';
-import { FooterWithSitemap } from '../Shared/Footer';
-import { Link } from 'react-router-dom';
+//import { ComplexNavbar } from '../Shared/Header';
+//import { FooterWithSitemap } from '../Shared/Footer';
+import { Link, useNavigate } from 'react-router-dom';
+import { signInWithPopup, FacebookAuthProvider, User } from "firebase/auth";
+import { authentication, database } from '../../../firebase/config';
+import { Usuario } from '../../../model/Usuario';
+import { doc, DocumentReference, getDoc, setDoc } from "firebase/firestore"
 
-const Login = () => (
-  <div className="flex flex-col items-center justify-center min-h-screen bg-backWhitelm dark:bg-blackbg">
-     {/*<ComplexNavbar /> Inclua seu componente ComplexNavbar aqui */}
+const Login: React.FC = () => {
+  const navigate = useNavigate();
+
+  //Esta função verifica se já existe um objecto na BD com o id do usuario atual
+  function cheekUser(user: User) {
+
+    //A funcao doc é usada para especificar o caminho do object
+    //o primeiro parametro é a base de dados, o segundo a tabela e o ultimo o id do objecto
+    const docRef = doc(database, "usuarios", user.uid);
+
+    //A função getDoc faz uma consulta da referencia acima
+    getDoc(docRef)
+      .then((docSnap) => {
+        if (docSnap.exists()) {
+          console.log("Dados encotrados");
+          navigate("/");
+        } else {
+          saveUser(user, docRef)
+        }
+      })
+      .catch((error) => {
+        console.log("Ocorreu um erro ao vericar o usuario" + error.message);
+      });
+  }
+
+  //A função responsavel por gravar os dados na db
+  function saveUser(user: User, docRef: DocumentReference) {
+
+    var usuario = new Usuario(
+      user.uid,
+      user.displayName,
+      user.email,
+      "default",
+      user.photoURL,
+      user.emailVerified,
+      user.phoneNumber
+    );
+
+    setDoc(docRef, usuario.toObject())
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error('Erro ao salvar dados:', error);
+      });
+  }
+
+
+  //funcao para autenticar usando o facebbok
+  function signInWithFacebook(): void {
+    const provider = new FacebookAuthProvider();
+    signInWithPopup(authentication, provider)
+      .then((result) => {
+        const user = result.user;
+        cheekUser(user);
+      }).catch((error) => {
+        console.log(error);
+        /*// Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.*/
+        const email = error.customData.email;
+        if (email != null) {
+          console.log("Este email ja esta sendo usado");
+        }
+      })
+  }
+
+  return (<div className="flex flex-col items-center justify-center min-h-screen bg-backWhitelm dark:bg-blackbg">
+    {/*<ComplexNavbar /> Inclua seu componente ComplexNavbar aqui */}
     <div className="mt-20 mb-10 bg-white dark:bg-blacklg rounded-lg shadow-lg p-8 max-w-sm mx-auto">
       <div className="text-center">
         <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
@@ -51,6 +122,23 @@ const Login = () => (
             />
           </svg>
           Entrar com Google
+        </button>
+
+        <button
+          type="button"
+          className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white dark:bg-blacklg text-gray-800 shadow-sm hover:bg-backWhitelm dark:hover:bg-blackbg disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 mt-4"
+          onClick={signInWithFacebook}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="rgba(1, 132, 255, 1)"
+          >
+            <path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127A22.336 22.336 0 0 0 14.201 3c-2.444 0-4.122 1.492-4.122 4.231v2.355H7.332v3.209h2.753v8.202h3.312z"></path>
+          </svg>
+          Entrar com Facebook
         </button>
         <div className="py-3 flex  items-center text-xs text-gray-400 uppercase before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:text-neutral-500 dark:before:border-neutral-600 dark:after:border-neutral-600">
           Ou
@@ -151,10 +239,11 @@ const Login = () => (
     </div>
     {/*Qaundo tivermos um logo, iremos substituir o text pelo logo*/}
     <Link to="../">
-        <h2 className='hover:text-light-blue-600'>Moz Educa</h2>
-      </Link>
-      {/*<FooterWithSitemap /> Inclua seu componente FooterWithSitemap aqui */}
+      <h2 className='hover:text-light-blue-600'>Moz Educa</h2>
+    </Link>
+    {/*<FooterWithSitemap /> Inclua seu componente FooterWithSitemap aqui */}
   </div>
-);
+  )
+};
 
 export default Login;

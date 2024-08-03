@@ -1,14 +1,79 @@
-import { ComplexNavbar } from '../Shared/Header';
-import { FooterWithSitemap } from '../Shared/Footer';
-import { Link } from 'react-router-dom';
+import { FacebookAuthProvider, signInWithPopup, User } from 'firebase/auth';
+import { Link, useNavigate } from 'react-router-dom';
+import { authentication, database } from '../../../firebase/config';
+import { doc, DocumentReference, getDoc, setDoc } from 'firebase/firestore';
+import { Usuario } from '../../../model/Usuario';
+
+export const Signup = () => {
+
+  const navigate = useNavigate();
+
+  //Esta função verifica se já existe um objecto na BD com o id do usuario atual
+  function cheekUser(user: User) {
+
+    //A funcao doc é usada para especificar o caminho do object
+    //o primeiro parametro é a base de dados, o segundo a tabela e o ultimo o id do objecto
+    const docRef = doc(database, "usuarios", user.uid);
+
+    //A função getDoc faz uma consulta da referencia acima
+    getDoc(docRef)
+      .then((docSnap) => {
+        if (docSnap.exists()) {
+          console.log("Dados encotrados");
+          navigate("/");
+        } else {
+          saveUser(user, docRef)
+        }
+      })
+      .catch((error) => {
+        console.log("Ocorreu um erro ao vericar o usuario" + error.message);
+      });
+  }
+
+  //A função responsavel por gravar os dados na db
+  function saveUser(user: User, docRef: DocumentReference) {
+
+    var usuario = new Usuario(
+      user.uid,
+      user.displayName,
+      user.email,
+      "default",
+      user.photoURL,
+      user.emailVerified,
+      user.phoneNumber
+    );
+
+    setDoc(docRef, usuario.toObject())
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error('Erro ao salvar dados:', error);
+      });
+  }
 
 
+  //funcao para autenticar usando o facebbok
+  function signInWithFacebook(): void {
+    const provider = new FacebookAuthProvider();
+    signInWithPopup(authentication, provider)
+      .then((result: { user: any; }) => {
+        const user = result.user;
+        cheekUser(user);
+      }).catch((error) => {
+        console.log(error);
+        /*// Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.*/
+        const email = error.customData.email;
+        if (email != null) {
+          console.log("Este email ja esta sendo usado");
+        }
+      })
+  }
 
-
-
-export const Signup = () => (
-    <> {/*<ComplexNavbar >*/}
-    
+  return (<>
     <div className="flex flex-col items-center justify-center min-w-80   min-h-screen bg-backWhitelm dark:bg-blackbg">
       <div className="mt-20 mb-10 bg-white dark:bg-blacklg rounded-lg shadow-lg p-8 w-96  mx-auto">
         <div className="text-center">
@@ -56,12 +121,65 @@ export const Signup = () => (
             </svg>
             Cadastre-se com Google
           </button>
+
+          <button
+            type="button"
+            className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white dark:bg-blacklg text-gray-800 shadow-sm hover:bg-backWhitelm dark:hover:bg-blackbg disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 mt-4"
+            onClick={signInWithFacebook}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="rgba(1, 132, 255, 1)"
+            >
+              <path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127A22.336 22.336 0 0 0 14.201 3c-2.444 0-4.122 1.492-4.122 4.231v2.355H7.332v3.209h2.753v8.202h3.312z"></path>
+            </svg>
+            Entrar com Facebook
+          </button>
           <div className="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:text-neutral-500 dark:before:border-neutral-600 dark:after:border-neutral-600">
             Ou
           </div>
           {/* Formulário */}
           <form>
             <div className="grid gap-y-4">
+              {/* Grupo de Formulário */}
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm mb-2  dark:text-white"
+              >
+                Nome completo
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  id="nome"
+                  name="nome"
+                  className="py-3 px-4 block w-full border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:bg-blacklg dark:focus:ring-neutral-600"
+                  required={true}
+                  placeholder='Felex Mario'
+                  aria-describedby="name-error"
+                />
+                <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
+                  <svg
+                    className="size-5 text-red-500"
+                    width={16}
+                    height={16}
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                  >
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                  </svg>
+                </div>
+              </div>
+              <p className="hidden text-xs text-red-600 mt-2" id="name-error">
+                Por favor, digite o nome válido
+              </p>
+            </div>
+            {/* Fim do Grupo de Formulário */}
               {/* Grupo de Formulário */}
               <div>
                 <label
@@ -176,30 +294,30 @@ export const Signup = () => (
               {/* Grupo de Formulário */}
 
               <div className="flex items-start">
-            <div className="flex items-center h-5">
-              <input
-                id="newsletter"
-                aria-describedby="newsletter"
-                type="checkbox"
-                className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                required={true}
-              />
-            </div>
-            <div className="ml-3 text-sm">
-              <label
-                htmlFor="newsletter"
-                className="font-light text-gray-500 dark:text-gray-300"
-              >
-                Eu aceito os{" "}
-                <a
-                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                  href="#"
-                >
-                  Termos e Condições
-                </a>
-              </label>
-            </div>
-          </div>
+                <div className="flex items-center h-5">
+                  <input
+                    id="newsletter"
+                    aria-describedby="newsletter"
+                    type="checkbox"
+                    className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                    required={true}
+                  />
+                </div>
+                <div className="ml-3 text-sm">
+                  <label
+                    htmlFor="newsletter"
+                    className="font-light text-gray-500 dark:text-gray-300"
+                  >
+                    Eu aceito os{" "}
+                    <a
+                      className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                      href="#"
+                    >
+                      Termos e Condições
+                    </a>
+                  </label>
+                </div>
+              </div>
 
               <div className="text-right">
                 <button
@@ -221,8 +339,7 @@ export const Signup = () => (
       </Link>
 
     </div>
-    
+
     {/*<FooterWithSitemap /> */}
-    </>
-  )
-  
+  </>)
+}
