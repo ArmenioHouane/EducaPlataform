@@ -1,4 +1,4 @@
-import { FacebookAuthProvider, signInWithPopup, User } from 'firebase/auth';
+import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup, User } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { authentication, database } from '../../../firebase/config';
 import { doc, DocumentReference, getDoc, setDoc } from 'firebase/firestore';
@@ -72,6 +72,24 @@ export const Signup = () => {
         }
       })
   }
+//funcao para autenticar com o google
+
+function signUpWithGoogle(): void {
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(authentication, provider)
+    .then((result) => {
+      const user = result.user;
+      cheekUser(user);
+    }).catch((error) => {
+      console.log(error);
+      const email = error.customData.email;
+      if (email != null) {
+        console.log("Este email já está sendo usado");
+      }
+    });
+}
+
+
 
   return (<>
     <div className="flex flex-col items-center justify-center min-w-80   min-h-screen bg-backWhitelm dark:bg-blackbg">
@@ -94,6 +112,7 @@ export const Signup = () => {
           <button
             type="button"
             className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white dark:bg-blacklg text-gray-800 shadow-sm hover:bg-backWhitelm dark:hover:bg-blackbg disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
+            onClick={signUpWithGoogle}
           >
             <svg
               className="w-4 h-auto"
