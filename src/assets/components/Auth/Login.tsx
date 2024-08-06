@@ -2,14 +2,25 @@
 //import { ComplexNavbar } from '../Shared/Header';
 //import { FooterWithSitemap } from '../Shared/Footer';
 import { Link, useNavigate } from 'react-router-dom';
-import { signInWithPopup, FacebookAuthProvider, GoogleAuthProvider , User } from "firebase/auth";
+
+import { signInWithPopup, FacebookAuthProvider, User, signInWithEmailAndPassword } from "firebase/auth";
+
+import { GoogleAuthProvider } from "firebase/auth";
 import { authentication, database } from '../../../firebase/config';
 import { Usuario } from '../../../model/Usuario';
 import { doc, DocumentReference, getDoc, setDoc } from "firebase/firestore"
+import { ChangeEvent, useState } from 'react';
+import { signOut } from "firebase/auth";
+
 
 
 const Login: React.FC = () => {
-  const navigate = useNavigate();
+  
+    const navigate = useNavigate();
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
+  
+  
 
   //Esta função verifica se já existe um objecto na BD com o id do usuario atual
   function cheekUser(user: User) {
@@ -91,6 +102,43 @@ const Login: React.FC = () => {
       });
   }
   
+
+  //funcao para autenticar usando o email- Signin
+  const submit = () => {
+    console.log(email);
+    console.log(password);
+    
+    signInWithEmailAndPassword(authentication, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        cheekUser(user);
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+    };
+
+    const onEmailChange = (event:ChangeEvent<HTMLInputElement>) =>{
+      setEmail(event.target.value)
+    }
+
+    const onPasswordChange = (event:ChangeEvent<HTMLInputElement>) =>{
+      setPassword(event.target.value)
+    }
+
+
+    
+    // Função para logout
+    const logout = () => {
+      signOut(authentication).then(() => {
+        console.log('Sign-out successful.');
+        navigate("/login"); // Navegue para a página de login ou outra página após o logout
+      }).catch((error) => {
+        console.error('Erro ao fazer logout:', error);
+      });
+    }
+
 
   return (<div className="flex flex-col items-center justify-center min-h-screen bg-backWhitelm dark:bg-blackbg">
     {/*<ComplexNavbar /> Inclua seu componente ComplexNavbar aqui */}
@@ -175,6 +223,7 @@ const Login: React.FC = () => {
               <div className="relative">
                 <input
                   type="email"
+                  onChange={onEmailChange}
                   id="email"
                   name="email"
                   className="py-3 px-4 block w-full border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:bg-blacklg dark:focus:ring-neutral-600"
@@ -219,6 +268,7 @@ const Login: React.FC = () => {
               <div className="relative">
                 <input
                   type="password"
+                  onChange={onPasswordChange}
                   id="password"
                   name="password"
                   className="py-3 px-4 block w-full border dark:bg-blacklg border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
@@ -245,7 +295,7 @@ const Login: React.FC = () => {
             </div>
             {/* Fim do Grupo de Formulário */}
             <button
-              type="submit"
+            onClick={submit}  type="button"
               className="py-3 px-4 inline-flex justify-center items-center gap-x-3 text-center bg-blue-600 hover:bg-blue-700 border border-transparent text-sm lg:text-base text-white font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition-all disabled:opacity-50 disabled:pointer-events-none dark:focus:ring-offset-gray-800"
             >
               Entrar

@@ -1,41 +1,42 @@
-import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup, User } from 'firebase/auth';
+
+import { FacebookAuthProvider, signInWithEmailAndPassword, signInWithPopup, createUserWithEmailAndPassword, updateProfile, User } from 'firebase/auth';
+
+import {GoogleAuthProvider } from 'firebase/auth';
+
 import { Link, useNavigate } from 'react-router-dom';
 import { authentication, database } from '../../../firebase/config';
 import { doc, DocumentReference, getDoc, setDoc } from 'firebase/firestore';
 import { Usuario } from '../../../model/Usuario';
+import { useState, ChangeEvent } from 'react';
 
 export const Signup = () => {
 
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState('');
 
-  //Esta função verifica se já existe um objecto na BD com o id do usuario atual
   function cheekUser(user: User) {
-
-    //A funcao doc é usada para especificar o caminho do object
-    //o primeiro parametro é a base de dados, o segundo a tabela e o ultimo o id do objecto
     const docRef = doc(database, "usuarios", user.uid);
-
-    //A função getDoc faz uma consulta da referencia acima
     getDoc(docRef)
       .then((docSnap) => {
         if (docSnap.exists()) {
-          console.log("Dados encotrados");
+          console.log("Dados encontrados");
           navigate("/");
         } else {
-          saveUser(user, docRef)
+          saveUser(user, docRef);
         }
       })
       .catch((error) => {
-        console.log("Ocorreu um erro ao vericar o usuario" + error.message);
+        console.log("Ocorreu um erro ao verificar o usuario: " + error.message);
       });
   }
 
-  //A função responsavel por gravar os dados na db
   function saveUser(user: User, docRef: DocumentReference) {
-
-    var usuario = new Usuario(
+    const usuario = new Usuario(
       user.uid,
-      user.displayName,
+      name || user.displayName,
       user.email,
       "default",
       user.photoURL,
@@ -52,25 +53,19 @@ export const Signup = () => {
       });
   }
 
-
-  //funcao para autenticar usando o facebbok
   function signInWithFacebook(): void {
     const provider = new FacebookAuthProvider();
     signInWithPopup(authentication, provider)
-      .then((result: { user: any; }) => {
+      .then((result) => {
         const user = result.user;
         cheekUser(user);
       }).catch((error) => {
         console.log(error);
-        /*// Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.*/
         const email = error.customData.email;
         if (email != null) {
           console.log("Este email ja esta sendo usado");
         }
-      })
+      });
   }
 //funcao para autenticar com o google
 
@@ -91,21 +86,78 @@ function signUpWithGoogle(): void {
 
 
 
-  return (<>
-    <div className="flex flex-col items-center justify-center min-w-80   min-h-screen bg-backWhitelm dark:bg-blackbg">
-      <div className="mt-20 mb-10 bg-white dark:bg-blacklg rounded-lg shadow-lg p-8 w-96  mx-auto">
+  const submit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(email);
+    console.log(password);
+
+    signInWithEmailAndPassword(authentication, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        cheekUser(user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const signup = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      console.log("Passwords do not match");
+      return;
+    }
+
+    console.log(email);
+    console.log(password);
+
+    createUserWithEmailAndPassword(authentication, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        updateProfile(user, { displayName: name })
+          .then(() => {
+            cheekUser(user);
+          })
+          .catch((error) => {
+            console.log('Erro ao atualizar o perfil do usuário: ', error);
+          });
+      })
+      .catch((error) => {
+        console.log('Erro ao criar usuário: ', error);
+      });
+  };
+
+  const onEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
+
+  const onPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+  };
+
+  const onConfirmPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setConfirmPassword(event.target.value);
+  };
+
+  const onNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center min-w-80 min-h-screen bg-backWhitelm dark:bg-blackbg">
+      <div className="mt-20 mb-10 bg-white dark:bg-blacklg rounded-lg shadow-lg p-8 w-96 mx-auto">
         <div className="text-center">
           <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
             Cadastre-se
           </h1>
           <p className="mt-2 text-sm text-gray-600 dark:text-neutral-400">
             Já tem uma conta?{' '}
-            <a
+            <Link
               className="text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500"
-              href="/login"
+              to="/login"
             >
               Entre aqui
-            </a>
+            </Link>
           </p>
         </div>
         <div className="mt-5">
@@ -153,212 +205,98 @@ function signUpWithGoogle(): void {
               viewBox="0 0 24 24"
               fill="rgba(1, 132, 255, 1)"
             >
-              <path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127A22.336 22.336 0 0 0 14.201 3c-2.444 0-4.122 1.492-4.122 4.231v2.355H7.332v3.209h2.753v8.202h3.312z"></path>
+              <path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.591-1.56h1.7V3.268C16.017 3.184 15.125 3 14.084 3c-2.383 0-4.014 1.453-4.014 4.123v2.469H7.391v3.209h2.679v8.196h3.327z"></path>
             </svg>
-            Entrar com Facebook
+            Cadastre-se com Facebook
           </button>
-          <div className="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:text-neutral-500 dark:before:border-neutral-600 dark:after:border-neutral-600">
-            Ou
+
+          <div className="py-3 px-6">
+            <hr />
           </div>
-          {/* Formulário */}
-          <form>
+          
+          <form onSubmit={signup}>
             <div className="grid gap-y-4">
-              {/* Grupo de Formulário */}
+
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm mb-2  dark:text-white"
-              >
-                Nome completo
-              </label>
-              <div className="relative">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-bold ml-1 mb-2 text-gray-800 dark:text-white"
+                >
+                  Nome
+                </label>
                 <input
                   type="text"
-                  id="nome"
-                  name="nome"
-                  className="py-3 px-4 block w-full border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:bg-blacklg dark:focus:ring-neutral-600"
-                  required={true}
-                  placeholder='Felex Mario'
-                  aria-describedby="name-error"
+                  id="name"
+                  value={name}
+                  onChange={onNameChange}
+                  className="py-3 px-4 block w-full border-2 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
+                  required
                 />
-                <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
-                  <svg
-                    className="size-5 text-red-500"
-                    width={16}
-                    height={16}
-                    fill="currentColor"
-                    viewBox="0 0 16 16"
-                    aria-hidden="true"
-                  >
-                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                  </svg>
-                </div>
               </div>
-              <p className="hidden text-xs text-red-600 mt-2" id="name-error">
-                Por favor, digite o nome válido
-              </p>
-            </div>
-            {/* Fim do Grupo de Formulário */}
-              {/* Grupo de Formulário */}
+
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm mb-2  dark:text-white"
+                  className="block text-sm font-bold ml-1 mb-2 text-gray-800 dark:text-white"
                 >
-                  Endereço de email
+                  Email
                 </label>
-                <div className="relative">
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="py-3 px-4 block w-full border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:bg-blacklg dark:focus:ring-neutral-600"
-                    required={true}
-                    placeholder="nome@gmail.com"
-                    aria-describedby="email-error"
-                  />
-                  <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
-                    <svg
-                      className="size-5 text-red-500"
-                      width={16}
-                      height={16}
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                      aria-hidden="true"
-                    >
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                    </svg>
-                  </div>
-                </div>
-                <p className="hidden text-xs text-red-600 mt-2" id="email-error">
-                  Por favor, inclua um endereço de email válido para que possamos entrar em contato
-                </p>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={onEmailChange}
+                  className="py-3 px-4 block w-full border-2 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
+                  required
+                />
               </div>
-              {/* Fim do Grupo de Formulário */}
-              {/* Grupo de Formulário */}
+
+          
+
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm mb-2 dark:text-white"
+                  className="block text-sm font-bold ml-1 mb-2 text-gray-800 dark:text-white"
                 >
-                  Senha
+                  Password
                 </label>
-                <div className="relative">
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    className="py-3 px-4 block w-full border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:bg-blacklg dark:focus:ring-neutral-600"
-                    required={true}
-                    placeholder="**********"
-                    aria-describedby="password-error"
-                  />
-                  <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
-                    <svg
-                      className="size-5 text-red-500"
-                      width={16}
-                      height={16}
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                      aria-hidden="true"
-                    >
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                    </svg>
-                  </div>
-                </div>
-                <p className="hidden text-xs text-red-600 mt-2" id="password-error">
-                  São necessários 8+ caracteres
-                </p>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={onPasswordChange}
+                  className="py-3 px-4 block w-full border-2 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
+                  required
+                />
               </div>
-              {/* Fim do Grupo de Formulário */}
-              {/* Grupo de Formulário */}
+
               <div>
                 <label
-                  htmlFor="confirm-password"
-                  className="block text-sm mb-2 dark:text-white"
+                  htmlFor="confirmPassword"
+                  className="block text-sm font-bold ml-1 mb-2 text-gray-800 dark:text-white"
                 >
-                  Confirme a senha
+                  Confirmar Password
                 </label>
-                <div className="relative">
-                  <input
-                    type="password"
-                    id="confirm-password"
-                    name="confirm-password"
-                    className="py-3 px-4 block w-full border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:bg-blacklg dark:focus:ring-neutral-600"
-                    required={true}
-                    placeholder="**********"
-                    aria-describedby="confirm-password-error"
-                  />
-                  <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
-                    <svg
-                      className="size-5 text-red-500"
-                      width={16}
-                      height={16}
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                      aria-hidden="true"
-                    >
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                    </svg>
-                  </div>
-                </div>
-                <p
-                  className="hidden text-xs text-red-600 mt-2"
-                  id="confirm-password-error"
-                >
-                  As senhas precisam ser iguais
-                </p>
-              </div>
-              {/* Fim do Grupo de Formulário */}
-              {/* Grupo de Formulário */}
-
-              <div className="flex items-start">
-                <div className="flex items-center h-5">
-                  <input
-                    id="newsletter"
-                    aria-describedby="newsletter"
-                    type="checkbox"
-                    className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                    required={true}
-                  />
-                </div>
-                <div className="ml-3 text-sm">
-                  <label
-                    htmlFor="newsletter"
-                    className="font-light text-gray-500 dark:text-gray-300"
-                  >
-                    Eu aceito os{" "}
-                    <a
-                      className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                      href="#"
-                    >
-                      Termos e Condições
-                    </a>
-                  </label>
-                </div>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  value={confirmPassword}
+                  onChange={onConfirmPasswordChange}
+                  className="py-3 px-4 block w-full border-2 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
+                  required
+                />
               </div>
 
-              <div className="text-right">
-                <button
-                  type="submit"
-                  className="inline-flex justify-center items-center py-3 px-6 text-sm font-medium rounded-lg border border-transparent transition-colors bg-blue-600 text-white dark:bg-neutral-700 dark:border-neutral-600 dark:text-white dark:hover:bg-neutral-800 dark:hover:border-neutral-600 focus:ring-blue-500 hover:bg-black focus:ring-2 focus:ring-opacity-50 w-full text-center"
-                >
-                  Criar Conta
-                </button>
-              </div>
-              {/* Fim do Grupo de Formulário */}
+              <button
+                type="submit"
+                className="py-3 inline-flex justify-center items-center gap-x-2 text-sm font-semibold text-center text-white bg-blue-500 hover:bg-blue-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 dark:focus:ring-offset-black"
+              >
+                Registar-se
+              </button>
             </div>
           </form>
-          {/* Fim do Formulário */}
         </div>
       </div>
-
-      <Link to="../">
-        <h2 className='hover:text-light-blue-600'>Moz Educa</h2>
-      </Link>
-
     </div>
-
-    {/*<FooterWithSitemap /> */}
-  </>)
-}
+  );
+};
