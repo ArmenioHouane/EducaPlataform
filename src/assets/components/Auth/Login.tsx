@@ -2,12 +2,16 @@
 //import { ComplexNavbar } from '../Shared/Header';
 //import { FooterWithSitemap } from '../Shared/Footer';
 import { Link, useNavigate } from 'react-router-dom';
+
 import { signInWithPopup, FacebookAuthProvider, User, signInWithEmailAndPassword } from "firebase/auth";
+
+import { GoogleAuthProvider } from "firebase/auth";
 import { authentication, database } from '../../../firebase/config';
 import { Usuario } from '../../../model/Usuario';
 import { doc, DocumentReference, getDoc, setDoc } from "firebase/firestore"
 import { ChangeEvent, useState } from 'react';
 import { signOut } from "firebase/auth";
+
 
 
 const Login: React.FC = () => {
@@ -82,6 +86,22 @@ const Login: React.FC = () => {
         }
       })
   }
+//funcao para autenticar usando o Google
+  function signInWithGoogle(): void {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(authentication, provider)
+      .then((result) => {
+        const user = result.user;
+        cheekUser(user);
+      }).catch((error) => {
+        console.log(error);
+        const email = error.customData.email;
+        if (email != null) {
+          console.log("Este email já está sendo usado");
+        }
+      });
+  }
+  
 
   //funcao para autenticar usando o email- Signin
   const submit = () => {
@@ -141,6 +161,7 @@ const Login: React.FC = () => {
         <button
           type="button"
           className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white dark:bg-blacklg text-gray-800 shadow-sm hover:bg-backWhitelm dark:hover:bg-blackbg disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
+          onClick={signInWithGoogle}
         >
           <svg
             className="w-4 h-auto"

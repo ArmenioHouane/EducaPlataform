@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC, useState } from "react";
 import {
   Navbar,
   MobileNav,
@@ -26,36 +26,49 @@ import {
   Bars2Icon,
 } from "@heroicons/react/24/solid";
 import ThemePlugin from "./theme-plugin";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-// profile menu component
-const profileMenuItems = [
-  {
-    label: "Meu Perfil",
-    icon: UserCircleIcon,
-  },
-  {
-    label: "Editar Perfil",
-    icon: Cog6ToothIcon,
-  },
-  {
-    label: "Inbox",
-    icon: InboxArrowDownIcon,
-  },
-  {
-    label: "Ajuda",
-    icon: LifebuoyIcon,
-  },
-  {
-    label: "Sign Out",
-    icon: PowerIcon,
-  },
-];
+const ProfileMenu: FC<HomeProps> = (props): JSX.Element => {
+  const navigate = useNavigate();
 
-function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const closeMenu = () => setIsMenuOpen(false);
+
+  function goToProfile() {
+    navigate("/profile");
+  }
+
+  // profile menu component
+  const profileMenuItems = [
+    {
+      label: "Meu Perfil",
+      icon: UserCircleIcon,
+      action: goToProfile,
+    },
+    {
+      label: "Editar Perfil",
+      icon: Cog6ToothIcon,
+      action: closeMenu,
+    },
+    {
+      label: "Inbox",
+      icon: InboxArrowDownIcon,
+      action: closeMenu,
+    },
+    {
+      label: "Ajuda",
+      icon: LifebuoyIcon,
+      action: closeMenu,
+    },
+    {
+      label: "Sign Out",
+      icon: PowerIcon,
+      action: closeMenu,
+    },
+  ];
+
+
 
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
@@ -70,28 +83,26 @@ function ProfileMenu() {
             size="sm"
             alt="tania andrew"
             className="border border-gray-900 p-0.5"
-            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+            src={(props.user != null) ? (props.user.photoURL) : ""}
           />
           <ChevronDownIcon
             strokeWidth={2.5}
-            className={`h-3 w-3 transition-transform ${
-              isMenuOpen ? "rotate-180" : ""
-            }`}
+            className={`h-3 w-3 transition-transform ${isMenuOpen ? "rotate-180" : ""
+              }`}
           />
         </Button>
       </MenuHandler>
       <MenuList className="p-1">
-        {profileMenuItems.map(({ label, icon }, key) => {
+        {profileMenuItems.map(({ label, icon, action }, key) => {
           const isLastItem = key === profileMenuItems.length - 1;
           return (
             <MenuItem
               key={label}
-              onClick={closeMenu}
-              className={`flex items-center gap-2 rounded ${
-                isLastItem
-                  ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
-                  : ""
-              }`}
+              onClick={action}
+              className={`flex items-center gap-2 rounded ${isLastItem
+                ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
+                : ""
+                }`}
             >
               {React.createElement(icon, {
                 className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
@@ -159,9 +170,8 @@ function NavListMenu() {
               Paginas{" "}
               <ChevronDownIcon
                 strokeWidth={2}
-                className={`h-3 w-3 transition-transform ${
-                  isMenuOpen ? "rotate-180" : ""
-                }`}
+                className={`h-3 w-3 transition-transform ${isMenuOpen ? "rotate-180" : ""
+                  }`}
               />
             </MenuItem>
           </Typography>
@@ -194,11 +204,6 @@ function NavListMenu() {
 // nav list component
 const navListItems = [
   {
-    label: "Conta",
-    icon: UserCircleIcon,
-    to: "/profile",
-  },
-  {
     label: "Quizes",
     icon: CubeTransparentIcon,
   },
@@ -225,7 +230,27 @@ function NavList() {
   );
 }
 
-export function ComplexNavbar() {
+function AuthButtons() {
+  return (<>
+    <Link to="/login">
+      <Button size="sm" variant="text">
+        <span>Login</span>
+      </Button>
+    </Link>
+    <Link to="/signup">
+      <Button size="sm" variant="gradient" className="hidden lg:inline-block">
+        <span>Regista-te</span>
+      </Button>
+    </Link>
+  </>
+  )
+}
+
+interface HomeProps {
+  user : User | null
+}
+
+export const ComplexNavbar : FC<HomeProps> = (props) => {
   const [isNavOpen, setIsNavOpen] = React.useState(false);
 
   const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
@@ -235,6 +260,7 @@ export function ComplexNavbar() {
       "resize",
       () => window.innerWidth >= 960 && setIsNavOpen(false),
     );
+
   }, []);
 
   return (
@@ -264,17 +290,7 @@ export function ComplexNavbar() {
         >
           <Bars2Icon className="h-6 w-6" />
         </IconButton>
-        <Link to="/login">
-          <Button size="sm" variant="text">
-            <span>Login</span>
-          </Button>
-        </Link>
-        <Link to="/signup">
-          <Button size="sm" variant="gradient" className="hidden lg:inline-block">
-            <span>Regista-te</span>
-          </Button>
-        </Link>
-        <ProfileMenu />
+        {props.user == null ? <AuthButtons /> : <ProfileMenu user={props.user}/>}
       </div>
       <MobileNav open={isNavOpen}>
         <NavList />

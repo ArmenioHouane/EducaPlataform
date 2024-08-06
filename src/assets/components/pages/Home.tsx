@@ -2,11 +2,33 @@ import { ComplexNavbar } from '../Shared/Header';
 import { FooterWithSitemap } from '../Shared/Footer';
 import Feature from './Feature';
 import Pricing from './Pricing';
+import { useState } from 'react';
+import React from 'react';
+import { onAuthStateChanged, User } from 'firebase/auth';
+import { authentication } from '../../../firebase/config';
+
+
 
 const Home = () => {
+
+  const [user, setUser]= useState<User | null>(null);
+
+  React.useEffect(() => {
+
+    //Funcao para verificar s e o usuario esta autenticado
+    onAuthStateChanged(authentication, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        console.log("nao conectado");
+      }
+    });
+
+  }, []);
+
   return (
     <div className=" dark:bg-backdarklm">
-      <ComplexNavbar />
+      <ComplexNavbar user={user}/>
       <div className="p-4 bg-backdarklm dark:bg-backdarkdm">
         <div
           aria-hidden="true"
