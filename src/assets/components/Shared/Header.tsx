@@ -27,6 +27,8 @@ import {
 } from "@heroicons/react/24/solid";
 import ThemePlugin from "./theme-plugin";
 import { Link, useNavigate } from 'react-router-dom';
+import { signOut } from "firebase/auth";
+import { authentication } from "../../../firebase/config";
 
 const ProfileMenu: FC<HomeProps> = (props): JSX.Element => {
   const navigate = useNavigate();
@@ -37,6 +39,10 @@ const ProfileMenu: FC<HomeProps> = (props): JSX.Element => {
 
   function goToProfile() {
     navigate("/profile");
+  }
+
+  function signOutUser(){
+    signOut(authentication);
   }
 
   // profile menu component
@@ -64,7 +70,7 @@ const ProfileMenu: FC<HomeProps> = (props): JSX.Element => {
     {
       label: "Sign Out",
       icon: PowerIcon,
-      action: closeMenu,
+      action: signOutUser,
     },
   ];
 
@@ -264,8 +270,8 @@ export const ComplexNavbar : FC<HomeProps> = (props) => {
   }, []);
 
   return (
-    <Navbar className="fixed top-0 left-0 right-0 z-50 mx-auto max-w-screen-xl p-2 lg:rounded-full lg:pl-6">
-      <div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
+    <Navbar className="fixed top-0 left-0 right-0 z-50 max-w-full w-full p-2 lg:pl-6">
+      <div className="relative w-full max-w-full flex items-center justify-between text-blue-gray-900">
         <ThemePlugin initialTheme="light" />
         <Typography
           as="a"

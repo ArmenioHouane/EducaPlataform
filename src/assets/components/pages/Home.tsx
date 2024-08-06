@@ -21,6 +21,7 @@ const Home = () => {
         setUser(user);
       } else {
         console.log("nao conectado");
+        setUser(null)
       }
     });
 
