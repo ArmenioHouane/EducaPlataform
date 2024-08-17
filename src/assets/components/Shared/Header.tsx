@@ -270,7 +270,7 @@ export const ComplexNavbar : FC<HomeProps> = (props) => {
   }, []);
 
   return (
-    <Navbar className="fixed top-0 left-0 right-0 z-50 max-w-full w-full p-2 lg:pl-6">
+    <Navbar className="fixed top-0 left-0 right-0 z-40 max-w-full w-full p-2 lg:pl-6">
       <div className="relative w-full max-w-full flex items-center justify-between text-blue-gray-900">
         <ThemePlugin initialTheme="light" />
         <Typography
