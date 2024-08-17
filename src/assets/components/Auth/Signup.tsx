@@ -84,12 +84,32 @@ function signUpWithGoogle(): void {
     });
 }
 
+
+
+  const submit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(email);
+    console.log(password);
+
+    signInWithEmailAndPassword(authentication, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        cheekUser(user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const signup = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       console.log("Passwords do not match");
       return;
     }
+
+    console.log(email);
+    console.log(password);
 
     createUserWithEmailAndPassword(authentication, email, password)
       .then((userCredential) => {

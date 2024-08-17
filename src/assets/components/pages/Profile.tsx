@@ -4,12 +4,10 @@ import * as Yup from "yup";
 import { ComplexNavbar } from "../Shared/Header";
 import { FooterWithSitemap } from "../Shared/Footer";
 import { ChangeEvent, useEffect, useState } from "react";
-import { onAuthStateChanged, updateProfile, User } from "firebase/auth";
-import { authentication, storage } from "../../../firebase/config";
+import { onAuthStateChanged, User } from "firebase/auth";
+import { authentication } from "../../../firebase/config";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Loader } from "../Shared/Loader";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 interface Countrie {
     name: string,
@@ -27,73 +25,18 @@ const Profile: React.FC = () => {
     const [email, setEmail] = useState('');
     const [fullName, setFullName] = useState('');
     const [imageUrl, setImageUrl] = useState('');
-    const [imageFile, setImageFile] = useState('');
-    const [isLoading, setLoadingState] = useState(false);
-    const [loadingMessage, setLoadingMessage] = useState<String>('Loading...');
-
-
-    function onEmailChange(e: ChangeEvent<HTMLInputElement>) {
+    
+    function onEmailChange(e : ChangeEvent<HTMLInputElement>){
         setEmail(e.target.value)
     }
 
-    function onFullNameChange(e: ChangeEvent<HTMLInputElement>) {
+    function onFullNameChange(e : ChangeEvent<HTMLInputElement>){
         setFullName(e.target.value)
     }
 
-    function closeLoader() {
-        setLoadingState(false);
-        setLoadingMessage('Loading...');
-    }
-
-    function openLoader(message: String) {
-        setLoadingState(true);
-        setLoadingMessage(message);
-    }
-
-    function onImageURLChange(e: ChangeEvent<HTMLInputElement>) {
+    function onImageURLChange(e : ChangeEvent<HTMLInputElement>){
         //setImageUrl(e.target.value)
-        openLoader("Preparando a imagem")
-        const file = e.target.files[0];
-        //setImageUrl(URL.createObjectURL(e.target.files[0]));
-        if (file) {
-
-            if (file.size > 1048576) {
-                alert('O arquivo é muito grande. Por favor, selecione um arquivo menor que 1 MB.');
-                closeLoader();
-                return
-            }
-            const storageReference = ref(storage, 'profile/' + user?.uid + '.' + file.type)
-            openLoader("Carregando a imagem");
-            uploadBytes(storageReference, file).then((snapshot) => {
-                openLoader("obtendo a url");
-                getDownloadURL(snapshot.ref)
-                    .then((url) => {
-                        openLoader("Deixando tudo pronto para si");
-                        updateProfile(user, {
-                            photoURL: url
-                        }).then(() => {
-                            setImageUrl(url)
-                            closeLoader();
-                        }).catch((error) => {
-                            closeLoader();
-                            console.log("Ocoreu um erro ao atualizar a url da imagem" + error.message);
-                        });
-                    }).catch((error) => {
-                        closeLoader();
-                        console.log("Ocoreu um erro ao obter a url de download" + error.message);
-                    });
-                /**/
-            }).catch((error) => {
-                console.log("Ocoreu um erro ao carregar a imagem" + error.message);
-                closeLoader();
-            });
-        } else {
-            closeLoader();
-        }
-
     }
-
-    const buttonStyle = "dark:bg-darkbtncolordm bg-darkbtncolorlm border-solid  dark:text-darkinnercolordm text-darkinnercolorlm hover:bg-bgHoverdm dark:hover:bg-bgHoverlm px-4 py-1 mt-3 "
 
     React.useEffect(() => {
 
@@ -124,30 +67,10 @@ const Profile: React.FC = () => {
 
     }, []);
 
-    function updateName() {
-        setLoadingState(true)
-        setLoadingMessage("Atualizando o nome, por favor aguarde")
-        updateProfile(user, { displayName: fullName })
-            .then(() => {
-                setFullName(user?.displayName)
-                setLoadingState(false)
-                setLoadingMessage("Loading")
-            })
-            .catch((error) => {
-                console.log('Erro ao atualizar o nome do usuário: ', error);
-                setLoadingState(false)
-                setLoadingMessage("Loading")
-            });
-    }
 
-    function resetNameField() {
-        setFullName(user?.displayName);
-    }
-    
 
     return (
         <div className="dark:bg-backdarkl w-fullm relative">
-            {isLoading ? <Loader message={loadingMessage} /> : ''}
             <ComplexNavbar user={user} />
 
             <div className="p-14">
@@ -156,9 +79,9 @@ const Profile: React.FC = () => {
 
                     <div className="img">
                         <h4>Imagem</h4>
-                        <label htmlFor="user-image" className="w-52">
+                        <label htmlFor="user-image">
                             {
-                                <img src={imageUrl != null ? imageUrl : ''} className="w-52 h-52 rounded-lg" />
+                                <img src={imageUrl != null ? imageUrl: ''} />
                             }
                         </label>
                         <span>A imagem deve ter um tamanho máximo de 1MB</span>
@@ -170,17 +93,15 @@ const Profile: React.FC = () => {
                                 Remover
                             </button>
 
-                            <label
-                                className={buttonStyle}
-                                htmlFor="user-image"
+                            <button
+                                className="dark:bg-darkbtncolordm bg-darkbtncolorlm border-solid  dark:text-darkinnercolordm text-darkinnercolorlm hover:bg-bgHoverdm dark:hover:bg-bgHoverlm px-4 py-1 mt-3 "
                             >
-                                {user?.photoURL == null ? "Carregar" : "Alterar"}
-                            </label>
-                            <input
+                                Alterar
+                            </button>
+                            <input 
                                 onChange={onImageURLChange}
                                 type="file" name="user-image" id="user-image" accept="image/*"
-
-                                className="dark:bg-darkbtncolordm bg-darkbtncolorlm border-solid  dark:text-darkinnercolordm hidden text-darkinnercolorlm hover:bg-bgHoverdm dark:hover:bg-bgHoverlm px-4 py-1 mt-3 "
+                                className="dark:bg-darkbtncolordm bg-darkbtncolorlm border-solid  dark:text-darkinnercolordm text-darkinnercolorlm hover:bg-bgHoverdm dark:hover:bg-bgHoverlm px-4 py-1 mt-3 "
                             />
                         </div>
                     </div>
@@ -207,20 +128,11 @@ const Profile: React.FC = () => {
                                     placeholder='Helder'
                                     aria-describedby="email-error"
                                 />
-                                <div className="flex gap-2">
-                                    {user?.displayName != fullName ? <button
-                                        className="dark:bg-darkbtncolordm bg-darkbtncolorlm dark:text-darkinnercolordm text-darkinnercolorlm hover:bg-bgHoverdm dark:hover:bg-bgHoverlm px-4 py-1 rounded-md mt-3" onClick={resetNameField} disabled
-                                    >
-                                        Cancelar
-                                    </button> : ''}
-                                    {user?.displayName != fullName ? <button
-                                        className="dark:bg-darkbtncolordm bg-darkbtncolorlm dark:text-darkinnercolordm text-darkinnercolorlm hover:bg-bgHoverdm dark:hover:bg-bgHoverlm px-4 py-1 rounded-md mt-3 disabled:bg-blue-gray-600" onClick={updateName}
-                                        disabled={user?.emailVerified ? true : false}
-                                    >
-                                        Alterar
-                                    </button> : ''}
-                                </div>
-
+                                {user?.displayName != fullName ? <button
+                                    className="dark:bg-darkbtncolordm bg-darkbtncolorlm dark:text-darkinnercolordm text-darkinnercolorlm hover:bg-bgHoverdm dark:hover:bg-bgHoverlm px-4 py-1 rounded-md mt-3 "
+                                >
+                                    Alterar
+                                </button> : ''}
                             </div>
                             <p className="hidden text-xs text-red-600 mt-2" id="email-error">
                                 Por favor, inclua um endereço de email válido para que possamos entrar em contato
@@ -260,12 +172,11 @@ const Profile: React.FC = () => {
                                 <button
                                     className="dark:bg-darkbtncolordm bg-darkbtncolorlm dark:text-darkinnercolordm text-darkinnercolorlm hover:bg-bgHoverdm dark:hover:bg-bgHoverlm px-4 py-1 rounded-md mt-3 "
                                 >
-                                    {user?.emailVerified ? "Verificado" : "Verificar"}
+                                    Verificado
                                 </button>
 
                                 <button
                                     className="dark:bg-darkbtncolordm bg-darkbtncolorlm dark:text-darkinnercolordm text-darkinnercolorlm hover:bg-bgHoverdm dark:hover:bg-bgHoverlm px-4 py-1 rounded-md mt-3 "
-                                    disabled
                                 >
                                     Alterar
                                 </button>
