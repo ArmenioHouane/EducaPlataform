@@ -1,14 +1,18 @@
 import React from 'react';
+import SampleDashboard from './dashboard';
 
-import {Sidebar} from './sidebar';
-import { Dashview } from './dashview';
 
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="flex h-screen dark:bg-[#2F3D44]">
-     <Dashview />
-    </div>
+    <SampleDashboard>
+    <h2 className="text-2xl font-semibold">Welcome to the Dashboard</h2>
+    <p>This is the main content area.</p>
+</SampleDashboard>
+
+
+
+
   );
 };
 
