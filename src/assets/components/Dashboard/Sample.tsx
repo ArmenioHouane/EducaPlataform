@@ -8,6 +8,7 @@ const Dashboard: React.FC = () => {
     <SampleDashboard>
     <h2 className="text-2xl font-semibold">Welcome to the Dashboard</h2>
     <p>This is the main content area.</p>
+    
 </SampleDashboard>
 
 

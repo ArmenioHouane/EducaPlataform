@@ -16,7 +16,16 @@ import { Signup } from './assets/components/Auth/Signup';
 import Recovery from './assets/components/Auth/Recovery';
 import Change from './assets/components/Auth/Alterar';
 import Dashboard from './assets/components/Dashboard/Sample';
-
+import SettingsPage from './assets/components/Dashboard/pages/settings';
+import ProfilesPage from './assets/components/Dashboard/pages/profiles';
+import GradePage from './assets/components/Dashboard/pages/grade';
+import Quiz from './assets/components/Dashboard/pages/quiz';
+import Student from './assets/components/Dashboard/pages/admin/student-list';
+import Overview from './assets/components/Dashboard/pages/admin/overview';
+import FileManager from './assets/components/Dashboard/pages/admin/file-manager';
+import FileUpload from './assets/components/Dashboard/pages/admin/fileupload';
+import Files from './assets/components/Dashboard/pages/files';
+import SituacaoFinanceira from './assets/components/Dashboard/pages/admin/situacaofinanceira';
 
 
 const App: React.FC = () => {
@@ -41,6 +50,17 @@ const App: React.FC = () => {
             <Route path="/recovery" element={<Recovery />} />
             <Route path="/change" element={<Change />} />
             <Route path="/dashboard" element={<Dashboard />}      />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/profiles" element={<ProfilesPage />} />
+            <Route path="/grade" element={<GradePage />} />
+            <Route path="/quiz" element={<Quiz />} />
+            <Route path="/student" element={<Student />} />
+            <Route path="/overview" element={<Overview />} />
+            <Route path="/filemanager" element={<FileManager />} />
+            <Route path="/fileupload" element={<FileUpload />} />
+            <Route path="/files" element={<Files />} />
+            <Route path="/situacao" element={<SituacaoFinanceira />} />
+
 
 
              </Routes>
