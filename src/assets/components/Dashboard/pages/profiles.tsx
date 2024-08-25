@@ -25,8 +25,8 @@ const ProfilesPage: React.FC = () => {
 
     return (
         <SampleDashboard>
-        <div className="p-6 bg-gray-100 min-h-screen">
-            <h1 className="text-2xl font-semibold mb-4">Profile</h1>
+        <div className="p-6 dark:bg-[#262626] border dark:border-[#404040]  rounded-lg min-h-screen">
+            <h1 className="text-2xl dark:text-[#3B82F6] font-semibold mb-4">Profile</h1>
             <div className="bg-white p-4 rounded shadow">
                 <h2 className="text-lg font-semibold mb-2">Edit Profile</h2>
                 <form onSubmit={handleSubmit}>

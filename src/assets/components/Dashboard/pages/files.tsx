@@ -1,21 +1,43 @@
 import React, { useState } from 'react';
 import SampleDashboard from '../dashboard';
 import { FaPaperPlane, FaDownload, FaList, FaThLarge, FaUpload } from 'react-icons/fa';
+import AddStudentModal from './admin/addstudent';
+
+
+
+
+interface Student {
+  nome: string;
+  turma: string;
+  curso: string;
+  numero: string;
+}
 
 const Files: React.FC = () => {
-  
+  const [students, setStudents] = useState<Student[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleAddStudent = (newStudent: Student) => {
+    setStudents([...students, newStudent]);
+  };
 
 
   return (
-    <SampleDashboard>
+    <SampleDashboard >
      <>
   {/* Table Section */}
-  <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+
+
+
+
+
+  
+  <div className="max-w-[75rem] max-h-[20rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
     {/* Card */}
     <div className="flex flex-col">
       <div className="-m-1.5 overflow-x-auto">
         <div className="p-1.5 min-w-full inline-block align-middle">
-          <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-neutral-800 dark:border-neutral-700">
+          <div className="bg-white  border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-neutral-800 dark:border-neutral-700">
             {/* Header */}
             <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
               <div>
@@ -34,27 +56,26 @@ const Files: React.FC = () => {
                   >
                     Ver Todos
                   </a>
-                  <a
-                    className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                    href="#"
-                  >
-                    <svg
-                      className="shrink-0 size-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width={24}
-                      height={24}
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M5 12h14" />
-                      <path d="M12 5v14" />
-                    </svg>
-                    Adicionar Estudante
-                  </a>
+                  <button
+         className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" onClick={() => setIsModalOpen(true)}
+      ><svg
+      className="shrink-0 size-4"
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M5 12h14" />
+      <path d="M12 5v14" />
+    </svg>
+        Adicionar Aluno
+      </button>
+                 
                 </div>
               </div>
             </div>
@@ -1344,6 +1365,14 @@ const Files: React.FC = () => {
     </div>
     {/* End Card */}
   </div>
+
+  {isModalOpen && (
+        <AddStudentModal
+          onClose={() => setIsModalOpen(false)}
+          onAddStudent={handleAddStudent}
+        />
+      )}
+
   {/* End Table Section */}
 </>
 
