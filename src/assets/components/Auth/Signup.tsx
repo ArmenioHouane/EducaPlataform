@@ -1,7 +1,5 @@
 
-import { FacebookAuthProvider, signInWithEmailAndPassword, signInWithPopup, createUserWithEmailAndPassword, updateProfile, User } from 'firebase/auth';
-
-import {GoogleAuthProvider } from 'firebase/auth';
+import { FacebookAuthProvider, signInWithPopup, createUserWithEmailAndPassword, updateProfile, User, GoogleAuthProvider } from 'firebase/auth';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { authentication, database } from '../../../firebase/config';
@@ -67,22 +65,22 @@ export const Signup = () => {
         }
       });
   }
-//funcao para autenticar com o google
-
-function signUpWithGoogle(): void {
-  const provider = new GoogleAuthProvider();
-  signInWithPopup(authentication, provider)
-    .then((result) => {
-      const user = result.user;
-      cheekUser(user);
-    }).catch((error) => {
-      console.log(error);
-      const email = error.customData.email;
-      if (email != null) {
-        console.log("Este email já está sendo usado");
-      }
-    });
-}
+  
+  //funcao para autenticar com o google
+  function signUpWithGoogle(): void {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(authentication, provider)
+      .then((result) => {
+        const user = result.user;
+        cheekUser(user);
+      }).catch((error) => {
+        console.log(error);
+        const email = error.customData.email;
+        if (email != null) {
+          console.log("Este email já está sendo usado");
+        }
+      });
+  }
 
   const signup = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -193,11 +191,11 @@ function signUpWithGoogle(): void {
           <div className="py-3 px-6">
             <hr />
           </div>
-          
+
           <form onSubmit={signup}>
             <div className="grid gap-y-4">
 
-            <div>
+              <div>
                 <label
                   htmlFor="name"
                   className="block text-sm font-bold ml-1 mb-2 text-gray-800 dark:text-white"
@@ -231,7 +229,7 @@ function signUpWithGoogle(): void {
                 />
               </div>
 
-          
+
 
               <div>
                 <label
