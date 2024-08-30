@@ -8,7 +8,7 @@ import { IoChatboxEllipsesSharp } from "react-icons/io5";
 import { FaCalendarDays } from "react-icons/fa6";
 import { HiOutlineAcademicCap } from "react-icons/hi2";
 
-const DashSidebar: React.FC = () => {
+const AdminSidebar: React.FC = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
 
     return (
@@ -47,7 +47,7 @@ const DashSidebar: React.FC = () => {
                 <li className="mb-2">
                     <a href="/grade" className="flex items-center dark:text-gray-400 text-black hover:text-blue-400 dark:hover:text-blue-400">
                         <GrResources size={24} />
-                        {!isCollapsed && <span className="ml-2 dark:text-gray-400 font-semibold">Recursos</span>}
+                        {!isCollapsed && <span className="ml-2 dark:text-gray-400 font-semibold">Gerir Cursos</span>}
                     </a>
                 </li>
                 <div className="border-t-[1px]  dark:border-[#525151] border-[#c3c4c5]  mb-1  w-full "></div>
@@ -68,7 +68,7 @@ const DashSidebar: React.FC = () => {
                 <li className="mb-2">
                     <a href="/quiz" className="flex items-center dark:text-gray-400 text-black hover:text-blue-400 dark:hover:text-blue-400">
                         <MdOutlineQuiz size={24} />
-                        {!isCollapsed && <span className="ml-2 dark:text-gray-400 font-semibold">Quiz</span>}
+                        {!isCollapsed && <span className="ml-2 dark:text-gray-400 font-semibold">Gerir Quizzes</span>}
                     </a>
                 </li>
                 <div className="border-t-[1px]  dark:border-[#525151] border-[#c3c4c5]  mb-1  w-full "></div>
@@ -113,4 +113,4 @@ const DashSidebar: React.FC = () => {
     );
 };
 
-export default DashSidebar;
+export default AdminSidebar;

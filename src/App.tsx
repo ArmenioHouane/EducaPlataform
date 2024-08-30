@@ -16,6 +16,7 @@ import { Signup } from './assets/components/Auth/Signup';
 import Recovery from './assets/components/Auth/Recovery';
 import Change from './assets/components/Auth/Alterar';
 import Dashboard from './assets/components/Dashboard/Sample';
+import AdminDashboard from './assets/components/Dashboard/pages/admin/admindashboard';
 import SettingsPage from './assets/components/Dashboard/pages/settings';
 import ProfilesPage from './assets/components/Dashboard/pages/profiles';
 import GradePage from './assets/components/Dashboard/pages/grade';
@@ -26,6 +27,9 @@ import FileManager from './assets/components/Dashboard/pages/admin/file-manager'
 import FileUpload from './assets/components/Dashboard/pages/admin/fileupload';
 import Files from './assets/components/Dashboard/pages/files';
 import SituacaoFinanceira from './assets/components/Dashboard/pages/admin/situacaofinanceira';
+import AdminChat from './assets/components/Dashboard/pages/admin/admin-chat';
+import StudentChat from './assets/components/Dashboard/pages/student/student-chat';
+import AdminKanbanPage from './assets/components/Dashboard/pages/admin/admin-kanban';
 
 
 const App: React.FC = () => {
@@ -60,6 +64,11 @@ const App: React.FC = () => {
             <Route path="/fileupload" element={<FileUpload />} />
             <Route path="/files" element={<Files />} />
             <Route path="/situacao" element={<SituacaoFinanceira />} />
+            <Route path="/adminchat" element={<AdminChat />} />
+            <Route path="/studentchat" element={<StudentChat />} />
+            <Route path="/kanban" element={<AdminKanbanPage />} />
+            <Route path="/admindashboard" element={<AdminDashboard />} />
+
 
 
 
